@@ -45,8 +45,7 @@ generation.
 }
 \item if \code{coda = TRUE} a list with:
 \itemize{
-\item \emph{samples}: A object of class \code{link[coda]{mcmc.list}} containing all
-samples.
+\item \emph{samples}: A object of class \link[coda:mcmc.list]{coda::mcmc.list} containing all samples.
 \item \emph{log.p}: A matrix with the log density evaluate for aeach walker at each
 generation.
 }

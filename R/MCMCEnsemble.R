@@ -21,8 +21,7 @@
 #'    - *log.p*: A matrix with the log density evaluate for each walker at each
 #'       generation.
 #' * if `coda = TRUE` a list with:
-#'   - *samples*: A object of class \code{link[coda]{mcmc.list}} containing all
-#'     samples.
+#'   - *samples*: A object of class [coda::mcmc.list] containing all samples.
 #'   - *log.p*: A matrix with the log density evaluate for aeach walker at each
 #'     generation.
 #'
