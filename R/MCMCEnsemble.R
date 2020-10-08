@@ -22,7 +22,7 @@
 #'       generation.
 #' * if `coda = TRUE` a list with:
 #'   - *samples*: A object of class [coda::mcmc.list] containing all samples.
-#'   - *log.p*: A matrix with the log density evaluate for aeach walker at each
+#'   - *log.p*: A matrix with the log density evaluate for each walker at each
 #'     generation.
 #'
 #' @examples
@@ -111,10 +111,7 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
       )
     }
 
-    ll <- list()
-    for (w in 1:n.walkers) {
-      ll[[w]] <- coda::as.mcmc(res$samples[w, , ])
-    }
+    ll <- lapply(seq_len(n.walkers), function(w) coda::as.mcmc(res$samples[w, , ]))
     res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
 
