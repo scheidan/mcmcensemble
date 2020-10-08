@@ -1,6 +1,6 @@
 Package: MCMCEnsembleSampler
 Title: MCMC sampler
-Version: 1.2
+Version: 2.0
 Authors@R: c(
     person("Hugo", "Gruson", role = c("cre", "aut", "cph"),
     email = "hugo.gruson+R@normalesup.org",
