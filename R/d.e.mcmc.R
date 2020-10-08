@@ -15,6 +15,8 @@
 #' @return List containing: `samples[n.walkers,chain.length,n.dim] and
 #' $log.p[n.walkers,chain.length]`
 #'
+#' @importFrom stats runif
+#'
 #' @export
 #'
 #' @references
