@@ -7,5 +7,6 @@ Author: Sanda Dejanic, Andreas Scheidegger
 Maintainer: Sanda Dejanic <adhaphera@gmail.com>
 Description: Ensemble Markov Chain Monte Carlo samplers with different strategies to generate proposals.
 License: GPL-2
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Depends: coda
+Encoding: UTF-8

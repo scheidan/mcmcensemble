@@ -3,7 +3,6 @@
 \docType{package}
 \name{MCMCEnsembleSampler}
 \alias{MCMCEnsembleSampler}
-\alias{MCMCEnsembleSampler-package}
 \title{MCMCEnsembleSampler}
 \description{
 This package implements a particle Monte Carlo Markov Chain sampler

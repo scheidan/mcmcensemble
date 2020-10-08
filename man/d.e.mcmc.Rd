@@ -7,21 +7,35 @@
 d.e.mcmc(f, max.iter, n.walkers, n.dim, init.range, ...)
 }
 \arguments{
-\item{f}{a funtion to sample from}
+\item{f}{function that returns a value proportional to the log probability
+density to sample from.}
 
-\item{max.iter}{the maximum number of function evaluations}
+\item{max.iter}{maximum number of function evaluations}
 
-\item{n.walkers}{the number of walkers (ensemble size)}
+\item{n.walkers}{number of walkers (ensemble size)}
 
 \item{n.dim}{the number of parameters to sample}
 
-\item{init.range}{a matrix(nrow=n.dim, ncol=2) defying the initial range for all the parameters, every row of the matrix should contain the lower and the upper limit}
+\item{init.range}{a matrix(nrow=n.dim, ncol=2) defying the initial range for
+all the parameters, every row of the matrix should contain the lower and the
+upper limit}
 
-\item{...}{all additional agruments of f}
+\item{...}{all additional arguments of f}
 }
 \value{
-List containing: \code{samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
+List containing: \code{samples[n.walkers,chain.length,n.dim] and
+$log.p[n.walkers,chain.length]}
 }
 \description{
-Markov Chain Monte Carlo sampler: using the differential evolution jump move (implementation of the Ter Braak differential evolution)
+Markov Chain Monte Carlo sampler: using the differential evolution jump move
+(implementation of the Ter Braak differential evolution)
+}
+\references{
+Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
+Chain with snooker updater and fewer chains. Statistics and Computing,
+18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
+.
+}
+\author{
+Sanda Dejanic
 }

@@ -7,21 +7,33 @@
 s.m.mcmc(f, max.iter, n.walkers, n.dim, init.range, ...)
 }
 \arguments{
-\item{f}{a funtion to sample from}
+\item{f}{function that returns a value proportional to the log probability
+density to sample from.}
 
-\item{max.iter}{the maximum number of function evaluations}
+\item{max.iter}{maximum number of function evaluations}
 
-\item{n.walkers}{the number of walkers (ensemble size)}
+\item{n.walkers}{number of walkers (ensemble size)}
 
 \item{n.dim}{the number of parameters to sample}
 
-\item{init.range}{a matrix(nrow=n.dim, ncol=2) defying the initial range for all the parameters, every row of the matrix should contain the lower and the upper limit}
+\item{init.range}{a matrix(nrow=n.dim, ncol=2) defying the initial range for
+all the parameters, every row of the matrix should contain the lower and the
+upper limit}
 
-\item{...}{all additional agruments of f}
+\item{...}{all additional arguments of f}
 }
 \value{
 List containing: \code{$samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
 }
 \description{
-Markov Chain Monte Carlo sampler: using the stretch move (implementation of the Goodman and Ware emcee)
+Markov Chain Monte Carlo sampler: using the stretch move (implementation of
+the Goodman and Ware emcee)
+}
+\references{
+Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
+Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
+\doi{10.2140/camcos.2010.5.65}
+}
+\author{
+Sanda Dejanic
 }

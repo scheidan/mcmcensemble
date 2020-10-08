@@ -1,24 +1,27 @@
-## ................................
-## MCMC Ensemble Sampler
-## ..........................
-## Sanda Dejanic - R implementation of Ter Braak's differential evolution move
-## ...........................
-
-
-
-##' MCMC Ensemble sampler with the differential evolution jump move
-##'
-##' Markov Chain Monte Carlo sampler: using the differential evolution jump move (implementation of the Ter Braak differential evolution)
-##'
-##' @param f a funtion to sample from
-##' @param max.iter the maximum number of function evaluations
-##' @param n.walkers the number of walkers (ensemble size)
-##' @param n.dim the number of parameters to sample
-##' @param init.range a matrix(nrow=n.dim, ncol=2) defying the initial range for all the parameters, every row of the matrix should contain the lower and the upper limit
-##' @param ... all additional agruments of f
-##'
-##' @return List containing: \code{samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
-##' @export
+#' MCMC Ensemble sampler with the differential evolution jump move
+#'
+#' Markov Chain Monte Carlo sampler: using the differential evolution jump move
+#' (implementation of the Ter Braak differential evolution)
+#'
+#' @inheritParams MCMCEnsemble
+#' @param n.dim the number of parameters to sample
+#' @param init.range a matrix(nrow=n.dim, ncol=2) defying the initial range for
+#' all the parameters, every row of the matrix should contain the lower and the
+#' upper limit
+#' @param ... all additional arguments of f
+#'
+#' @author Sanda Dejanic
+#'
+#' @return List containing: \code{samples[n.walkers,chain.length,n.dim] and
+#' $log.p[n.walkers,chain.length]}
+#'
+#' @export
+#'
+#' @references
+#' Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
+#' Chain with snooker updater and fewer chains. Statistics and Computing,
+#' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
+#' .
 d.e.mcmc <- function(f, max.iter, n.walkers, n.dim, init.range, ...) {
 
 

@@ -1,23 +1,21 @@
-## ...........................
-## MCMC ensemble sampler
-## ................
-## Sanda Dejanic - R implementation of Goodman and Ware's emcee
-## .............................
-
-
-##' MCMC Ensemble sampler with the stretch move (emcee)
-##'
-##' Markov Chain Monte Carlo sampler: using the stretch move (implementation of the Goodman and Ware emcee)
-##'
-##' @param f a funtion to sample from
-##' @param max.iter the maximum number of function evaluations
-##' @param n.walkers the number of walkers (ensemble size)
-##' @param n.dim the number of parameters to sample
-##' @param init.range a matrix(nrow=n.dim, ncol=2) defying the initial range for all the parameters, every row of the matrix should contain the lower and the upper limit
-##' @param ... all additional agruments of f
-##'
-##' @return List containing: \code{$samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
-##' @export
+#' MCMC Ensemble sampler with the stretch move (emcee)
+#'
+#' Markov Chain Monte Carlo sampler: using the stretch move (implementation of
+#' the Goodman and Ware emcee)
+#'
+#' @inheritParams d.e.mcmc
+#'
+#' @author Sanda Dejanic
+#'
+#' @return List containing: \code{$samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
+#'
+#' @export
+#'
+#' @references
+#' Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
+#' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
+#' \doi{10.2140/camcos.2010.5.65}
+#'
 s.m.mcmc <- function(f, max.iter, n.walkers, n.dim, init.range, ...) {
 
 
