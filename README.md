@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![R build status](https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/MCMCEnsembleSampler/actions)
+[![Codecov test coverage](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler?branch=master)
 <!-- badges: end -->
 
 Ensemble Markov Chain Monte Carlo samplers with different strategies to generate
