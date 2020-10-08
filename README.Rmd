@@ -29,7 +29,7 @@ from [Goodman and Weare (2010)](https://doi.org/10.2140/camcos.2010.5.65))
 
 ## Installation
 
-```{r, message = FALSE}
+```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("Bisaloo/MCMCEnsembleSampler")
 ```
