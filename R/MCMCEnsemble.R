@@ -76,12 +76,12 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
 
   ## run mcmc
   method <- match.arg(method)
+  message("Using ", method, " move with ", n.walkers, " walkers.")
+
   if (method == "differential.evolution") {
-    message("Using differential evolution move with ", n.walkers, " walkers.")
     res <- d.e.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
   }
   if (method == "stretch") {
-    message("Using stretch move with ", n.walkers, " walkers.")
     res <- s.m.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
   }
 
