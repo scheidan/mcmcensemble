@@ -17,7 +17,7 @@ problems. Two samplers are proposed: the ‘differential.evolution’
 sampler from [ter Braak and Vrugt
 (2008)](https://doi.org/10.1007/s11222-008-9104-9) and the ‘stretch’
 sampler from [Goodman and Weare
-(2010)](https://doi.org/10.2140/camcos.2010.5.65))
+(2010)](https://doi.org/10.2140/camcos.2010.5.65)
 
 ## Installation
 
