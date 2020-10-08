@@ -41,12 +41,12 @@ res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
 #> Using stretch move with 10 walkers.
 str(res1)
 #> List of 2
-#>  $ samples: num [1:10, 1:300, 1:2] 0.776 0.163 0.15 0.298 0.354 ...
+#>  $ samples: num [1:10, 1:300, 1:2] 0.14 0.665 0.995 0.653 0.476 ...
 #>   ..- attr(*, "dimnames")=List of 3
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #>   .. ..$ : chr [1:2] "a" "b"
-#>  $ log.p  : num [1:10, 1:300] -3.94 -3.43 -3.6 -4.46 -2.28 ...
+#>  $ log.p  : num [1:10, 1:300] -3.59 -3.48 -2.41 -3.44 -2.44 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
@@ -73,15 +73,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>     Mean    SD Naive SE Time-series SE
-#> a 0.7812 7.363  0.13443         0.8971
-#> b 1.2648 2.167  0.03957         0.2474
+#>       Mean    SD Naive SE Time-series SE
+#> a -0.99617 9.404  0.17169         1.1082
+#> b  0.08097 3.802  0.06941         0.5324
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%     25%   50%   75%  97.5%
-#> a -14.146 -4.1775 1.130 5.914 14.729
-#> b  -4.005  0.2357 1.744 2.783  4.293
+#>     2.5%     25%     50%   75% 97.5%
+#> a -20.18 -6.6065 0.01745 5.148 17.65
+#> b -10.22 -0.9395 1.25350 2.573  4.29
 plot(res2$samples)
 ```
 
@@ -106,14 +106,14 @@ summary(res3$samples)
 #>    plus standard error of the mean:
 #> 
 #>      Mean    SD Naive SE Time-series SE
-#> a -1.9650 8.266  0.15092         0.7680
-#> b  0.7612 2.592  0.04733         0.2674
+#> a -0.6493 8.119  0.14824          0.631
+#> b  1.0218 2.408  0.04397          0.218
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%     25%    50%   75%  97.5%
-#> a -16.982 -8.0114 -1.857 4.681 11.685
-#> b  -5.593 -0.4268  1.350 2.500  4.405
+#>      2.5%      25%    50%   75%  97.5%
+#> a -14.947 -6.59386 -1.001 5.112 16.622
+#> b  -5.064 -0.08247  1.645 2.747  4.148
 plot(res3$samples)
 ```
 
