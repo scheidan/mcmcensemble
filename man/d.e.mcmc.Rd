@@ -23,7 +23,11 @@ upper limit}
 \item{...}{all additional arguments of f}
 }
 \value{
-List containing: \verb{samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
+List containing:
+\itemize{
+\item \code{samples[n.walkers,chain.length,n.dim]}
+\item \code{log.p[n.walkers,chain.length]}
+}
 }
 \description{
 Markov Chain Monte Carlo sampler: using the differential evolution jump move
