@@ -35,15 +35,21 @@ density to sample from.}
 \item{...}{further arguments passed to \code{f}}
 }
 \value{
-if \code{coda==FALSE} a list with
 \itemize{
- \item{samples }{A three dimensional array of samples with dimensions \code{walker} x \code{generation} x \code{parameter}}
- \item{log.p }{A matrix with the log density evaluate for aeach walker at each generation.}
+\item if \code{coda = FALSE} a list with:
+\itemize{
+\item \emph{samples}: A three dimensional array of samples with dimensions
+\code{walker} x \code{generation} x \code{parameter}
+\item \emph{log.p}: A matrix with the log density evaluate for each walker at each
+generation.
 }
-if \code{coda==TRUE} a list with
+\item if \code{coda = TRUE} a list with:
 \itemize{
- \item{samples }{A object of class \code{link[coda]{mcmc.list}} containing all samples.}
- \item{log.p }{A matrix with the log density evaluate for aeach walker at each generation.}
+\item \emph{samples}: A object of class \code{link[coda]{mcmc.list}} containing all
+samples.
+\item \emph{log.p}: A matrix with the log density evaluate for aeach walker at each
+generation.
+}
 }
 }
 \description{

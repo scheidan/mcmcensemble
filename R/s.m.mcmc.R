@@ -7,7 +7,7 @@
 #'
 #' @author Sanda Dejanic
 #'
-#' @return List containing: \code{$samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]}
+#' @return List containing: `$samples[n.walkers,chain.length,n.dim] and $log.p[n.walkers,chain.length]`
 #'
 #' @export
 #'

@@ -1,8 +1,8 @@
 #' MCMC ensemble sampler
 #'
 #' Ensemble Markov Chain Monte Carlo sampler with different strategies to generate proposals.
-#' Either the \emph{stretch move} as proposed by Goodman and Weare (2010),
-#' or a \emph{differential evolution jump move} similar to Braak and Vrugt (2008).
+#' Either the *stretch move* as proposed by Goodman and Weare (2010),
+#' or a *differential evolution jump move* similar to Braak and Vrugt (2008).
 #'
 #' @param f function that returns a value proportional to the log probability
 #' density to sample from.
@@ -10,20 +10,21 @@
 #' @param upper.inits vector specifying for each parameters the upper value the initial distribution
 #' @param max.iter maximum number of function evaluations
 #' @param n.walkers number of walkers (ensemble size)
-#' @param method method for proposal generation, either \code{"stretch"}, or
-#' \code{"differential.evolution"}. The first letter is sufficient.
+#' @param method method for proposal generation, either `"stretch"`, or
+#' `"differential.evolution"`. The first letter is sufficient.
 #' @param coda logical. Should the samples be returned as \code{link[coda]{mcmc.list}} object?
-#' @param ... further arguments passed to \code{f}
-#' @return if \code{coda==FALSE} a list with
-#' \itemize{
-#'  \item{samples }{A three dimensional array of samples with dimensions \code{walker} x \code{generation} x \code{parameter}}
-#'  \item{log.p }{A matrix with the log density evaluate for aeach walker at each generation.}
-#' }
-#' if \code{coda==TRUE} a list with
-#' \itemize{
-#'  \item{samples }{A object of class \code{link[coda]{mcmc.list}} containing all samples.}
-#'  \item{log.p }{A matrix with the log density evaluate for aeach walker at each generation.}
-#' }
+#' @param ... further arguments passed to `f`
+#' @return
+#' * if `coda = FALSE` a list with:
+#'   - *samples*: A three dimensional array of samples with dimensions
+#'     `walker` x `generation` x `parameter`
+#'    - *log.p*: A matrix with the log density evaluate for each walker at each
+#'       generation.
+#' * if `coda = TRUE` a list with:
+#'   - *samples*: A object of class \code{link[coda]{mcmc.list}} containing all
+#'     samples.
+#'   - *log.p*: A matrix with the log density evaluate for aeach walker at each
+#'     generation.
 #'
 #' @examples
 #' ## a log-pdf to sample from
