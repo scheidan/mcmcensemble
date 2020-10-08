@@ -27,6 +27,12 @@ test_that("multiplication works", {
 
   expect_s3_class(res3$samples, "mcmc.list")
 
+  expect_error(
+    MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1),
+                 max.iter=3000, n.walkers=10, method="d"),
+    "length"
+  )
+
   mockery::stub(MCMCEnsemble, "requireNamespace", FALSE)
 
   expect_error(
