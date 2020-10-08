@@ -1,13 +1,19 @@
 Package: MCMCEnsembleSampler
-Type: Package
 Title: MCMC sampler
-Version: 1.1
-Date: 2018-04-25
-Author: Sanda Dejanic, Andreas Scheidegger
-Maintainer: Sanda Dejanic <adhaphera@gmail.com>
-Description: Ensemble Markov Chain Monte Carlo samplers with different strategies to generate proposals.
+Version: 1.2
+Authors@R: c(
+    person("Hugo", "Gruson", role = c("cre", "aut", "cph"),
+    email = "hugo.gruson+R@normalesup.org",
+    comment = c(ORCID = "0000-0002-4094-1476")),
+    person("Sanda", "Dejanic", role = c("aut", "cph")),
+    person("Andreas", "Scheidegger", role = c("aut", "cph"),
+    comment = c(ORCID = "0000-0003-2575-2172"))
+    )
+Description: Ensemble Markov Chain Monte Carlo samplers with
+    different strategies to generate proposals.
 License: GPL-2
-RoxygenNote: 7.1.1
-Depends: coda
+Imports: 
+    coda
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
