@@ -104,11 +104,18 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
 
   ## convert to coda object
   if (coda) {
+
+    if (!requireNamespace("coda", quietly = TRUE)) {
+      stop("Package \"coda\" needed for projection plots. Please install it.",
+           call. = FALSE
+      )
+    }
+
     ll <- list()
     for (w in 1:n.walkers) {
       ll[[w]] <- coda::as.mcmc(res$samples[w, , ])
     }
-    res <- list(samples = as.mcmc.list(ll), log.p = res$log.p)
+    res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
 
   res

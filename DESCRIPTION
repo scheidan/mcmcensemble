@@ -12,7 +12,7 @@ Authors@R: c(
 Description: Ensemble Markov Chain Monte Carlo samplers with
     different strategies to generate proposals.
 License: GPL-2
-Imports: 
+Suggests: 
     coda
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

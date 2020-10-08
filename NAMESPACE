@@ -3,5 +3,3 @@
 export(MCMCEnsemble)
 export(d.e.mcmc)
 export(s.m.mcmc)
-import(coda)
-import(stats)
