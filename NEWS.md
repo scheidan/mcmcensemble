@@ -12,3 +12,4 @@ of `MCMCEnsemble()`
 ## Dev changes
 
 * roxygen2 documentation now uses markdown syntax
+* this package now has unit and regression tests
