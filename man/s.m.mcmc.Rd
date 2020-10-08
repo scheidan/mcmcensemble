@@ -4,23 +4,21 @@
 \alias{s.m.mcmc}
 \title{MCMC Ensemble sampler with the stretch move (emcee)}
 \usage{
-s.m.mcmc(f, max.iter, n.walkers, n.dim, init.range, ...)
+s.m.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
 }
 \arguments{
 \item{f}{function that returns a value proportional to the log probability
 density to sample from.}
 
+\item{lower.inits}{vector specifying for each parameters the lower value the initial distribution}
+
+\item{upper.inits}{vector specifying for each parameters the upper value the initial distribution}
+
 \item{max.iter}{maximum number of function evaluations}
 
 \item{n.walkers}{number of walkers (ensemble size)}
 
-\item{n.dim}{the number of parameters to sample}
-
-\item{init.range}{a matrix(nrow=n.dim, ncol=2) defying the initial range for
-all the parameters, every row of the matrix should contain the lower and the
-upper limit}
-
-\item{...}{all additional arguments of f}
+\item{...}{further arguments passed to \code{f}}
 }
 \value{
 List containing:

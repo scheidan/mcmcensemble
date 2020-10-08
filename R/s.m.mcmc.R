@@ -3,7 +3,7 @@
 #' Markov Chain Monte Carlo sampler: using the stretch move (implementation of
 #' the Goodman and Ware emcee)
 #'
-#' @inheritParams d.e.mcmc
+#' @inheritParams MCMCEnsemble
 #'
 #' @author Sanda Dejanic
 #'
@@ -18,9 +18,9 @@
 #' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 #' \doi{10.2140/camcos.2010.5.65}
 #'
-s.m.mcmc <- function(f, max.iter, n.walkers, n.dim, init.range, ...) {
+s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
-
+  n.dim <- length(lower.inits)
   ## initial values
 
 

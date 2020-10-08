@@ -4,11 +4,6 @@
 #' (implementation of the Ter Braak differential evolution)
 #'
 #' @inheritParams MCMCEnsemble
-#' @param n.dim the number of parameters to sample
-#' @param init.range a matrix(nrow=n.dim, ncol=2) defying the initial range for
-#' all the parameters, every row of the matrix should contain the lower and the
-#' upper limit
-#' @param ... all additional arguments of f
 #'
 #' @author Sanda Dejanic
 #'
@@ -25,9 +20,9 @@
 #' Chain with snooker updater and fewer chains. Statistics and Computing,
 #' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
 #' .
-d.e.mcmc <- function(f, max.iter, n.walkers, n.dim, init.range, ...) {
+d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
-
+  n.dim <- length(lower.inits)
   ## initial values
 
 
