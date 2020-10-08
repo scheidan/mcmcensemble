@@ -88,7 +88,7 @@ summary(res2$samples)
 plot(res2$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.svg" width="100%" />
 
 ``` r
 
@@ -120,7 +120,7 @@ summary(res3$samples)
 plot(res3$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.svg" width="100%" />
 
 ## Similar projects
 

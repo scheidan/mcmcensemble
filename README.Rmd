@@ -57,7 +57,7 @@ you can then use the `coda = TRUE` argument to get objects of class `mcmc.list`.
 The coda package then allows you to call `summary()` and `plot()` to get 
 informative and nicely formatted results and plots:
 
-```{r}
+```{r dev = 'svglite'}
 ## use stretch move, return samples as 'coda' object
 res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, method="stretch", coda=TRUE)
