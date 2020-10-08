@@ -4,24 +4,20 @@
 [![R build status](https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/MCMCEnsembleSampler/actions)
 <!-- badges: end -->
 
-Ensemble Markov Chain Monte Carlo samplers with different strategies to generate proposals.
-Either the _stretch move_ as proposed by Goodman and Weare (2010),
-or a _differential evolution jump move_ (similar to Braak and Vrugt,
-2008) is used.
-
+Ensemble Markov Chain Monte Carlo samplers with different strategies to generate
+proposals. Either the _stretch move_ as proposed by Goodman and Weare (2010), or
+a _differential evolution jump move_ (similar to Braak and Vrugt, 2008) is used.
 
 ## Installation
 
-1. Install the R package `devtools`
-2. Then run from R
-```R
-library(devtools)
-install_github("SandaD/MCMCEnsembleSampler")
+```r
+# install.packages("remotes")
+remotes::install_github("Bisaloo/MCMCEnsembleSampler")
 ```
 
 ## Usage
 
-```R
+```r
 library(MCMCEnsembleSampler)
 
 ## a log-pdf to sample from
@@ -54,6 +50,16 @@ plot(res3$samples)
 
 ## References
 
-Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance. Communications in Applied Mathematics and Computational Science, 5(1), 65–80.
+-  Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
+ Chain with snooker updater and fewer chains. Statistics and Computing,
+ 18(4), 435–446, <https://doi.org/10.1007/s11222-008-9104-9>
+-  Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
+ Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
+ <https://doi.org/10.2140/camcos.2010.5.65>
+ 
+## Similar projects
+ 
+This package also has (independent) implementations in other languages:
 
-Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov Chain with snooker updater and fewer chains. Statistics and Computing, 18(4), 435–446.
+- emcee in Python (<https://doi.org/10.21105/joss.01864>)
+- gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
