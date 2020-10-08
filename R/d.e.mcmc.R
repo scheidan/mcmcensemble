@@ -66,9 +66,8 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
       else {
         acc <- exp(log.p.new - log.p.old[n])
       }
-      test <- runif(1)
 
-      if (acc > test) {
+      if (acc > runif(1)) {
         samples[n, l, ] <- ensemble.new[n, ]
         ensemble.old[n, ] <- ensemble.new[n, ]
         log.p[n, l] <- log.p.new
