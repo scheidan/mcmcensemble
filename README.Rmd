@@ -21,10 +21,11 @@ set.seed(18052020)
 [![Codecov test coverage](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler?branch=master)
 <!-- badges: end -->
 
-Ensemble Markov Chain Monte Carlo samplers with different strategies to generate
-proposals. Either the _stretch move_ as proposed by Goodman and Weare (2010), or
-a _differential evolution jump move_ (similar to ter Braak and Vrugt, 2008) is 
-used.
+Provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which
+allow a faster convergence for badly scaled estimation problems. Two samplers
+are proposed: the 'differential.evolution' sampler from [ter Braak and Vrugt
+(2008)](https://doi.org/10.1007/s11222-008-9104-9) and the 'stretch' sampler
+from [Goodman and Weare (2010)](https://doi.org/10.2140/camcos.2010.5.65))
 
 ## Installation
 
@@ -73,18 +74,10 @@ summary(res3$samples)
 plot(res3$samples)
 ```
 
-## References
-
-- ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
- Chain with snooker updater and fewer chains. Statistics and Computing,
- 18(4), 435–446, <https://doi.org/10.1007/s11222-008-9104-9>
-- Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
- Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
- <https://doi.org/10.2140/camcos.2010.5.65>
- 
 ## Similar projects
  
-This package also has (independent) implementations in other languages:
+The methods used in this package also have (independent) implementations in 
+other languages:
 
 - emcee in Python (<https://doi.org/10.21105/joss.01864>)
 - gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
