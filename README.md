@@ -13,8 +13,8 @@ coverage](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/
 
 Ensemble Markov Chain Monte Carlo samplers with different strategies to
 generate proposals. Either the *stretch move* as proposed by Goodman and
-Weare (2010), or a *differential evolution jump move* (similar to Braak
-and Vrugt, 2008) is used.
+Weare (2010), or a *differential evolution jump move* (similar to ter
+Braak and Vrugt, 2008) is used.
 
 ## Installation
 
@@ -41,12 +41,12 @@ res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
 #> Using stretch move with 10 walkers.
 str(res1)
 #> List of 2
-#>  $ samples: num [1:10, 1:300, 1:2] 0.187 0.841 0.75 0.759 0.607 ...
+#>  $ samples: num [1:10, 1:300, 1:2] 0.776 0.163 0.15 0.298 0.354 ...
 #>   ..- attr(*, "dimnames")=List of 3
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #>   .. ..$ : chr [1:2] "a" "b"
-#>  $ log.p  : num [1:10, 1:300] -2.04 -3.2 -2.29 -3.57 -2.65 ...
+#>  $ log.p  : num [1:10, 1:300] -3.94 -3.43 -3.6 -4.46 -2.28 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
@@ -73,15 +73,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>      Mean    SD Naive SE Time-series SE
-#> a -1.7399 7.877  0.14382         0.8178
-#> b  0.9125 2.669  0.04874         0.3298
+#>     Mean    SD Naive SE Time-series SE
+#> a 0.7812 7.363  0.13443         0.8971
+#> b 1.2648 2.167  0.03957         0.2474
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%       25%    50%   75%  97.5%
-#> a -18.69 -6.615688 -1.706 3.307 13.055
-#> b  -7.01  0.002202  1.567 2.629  4.129
+#>      2.5%     25%   50%   75%  97.5%
+#> a -14.146 -4.1775 1.130 5.914 14.729
+#> b  -4.005  0.2357 1.744 2.783  4.293
 plot(res2$samples)
 ```
 
@@ -105,15 +105,15 @@ summary(res3$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>     Mean    SD Naive SE Time-series SE
-#> a -2.678 8.132  0.14847         0.7764
-#> b  0.845 2.993  0.05465         0.2791
+#>      Mean    SD Naive SE Time-series SE
+#> a -1.9650 8.266  0.15092         0.7680
+#> b  0.7612 2.592  0.04733         0.2674
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%      25%    50%   75%  97.5%
-#> a -19.745 -8.44280 -2.548 2.914 12.741
-#> b  -8.692 -0.02621  1.563 2.927  4.421
+#>      2.5%     25%    50%   75%  97.5%
+#> a -16.982 -8.0114 -1.857 4.681 11.685
+#> b  -5.593 -0.4268  1.350 2.500  4.405
 plot(res3$samples)
 ```
 

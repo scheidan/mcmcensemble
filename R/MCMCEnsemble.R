@@ -58,7 +58,7 @@
 #' @export
 #'
 #' @references
-#' Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
+#' ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
 #' Chain with snooker updater and fewer chains. Statistics and Computing,
 #' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
 #' Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
