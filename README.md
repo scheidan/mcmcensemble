@@ -1,5 +1,9 @@
 # MCMC Ensemble Sampler
 
+<!-- badges: start -->
+[![R build status](https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/MCMCEnsembleSampler/actions)
+<!-- badges: end -->
+
 Ensemble Markov Chain Monte Carlo samplers with different strategies to generate proposals.
 Either the _stretch move_ as proposed by Goodman and Weare (2010),
 or a _differential evolution jump move_ (similar to Braak and Vrugt,
