@@ -38,7 +38,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   for (k in 1:n.walkers) {
     for (g in 1:n.dim) {
-      ensemble.old[k, g] <- runif(1, init.range[g, 1], init.range[g, 2])
+      ensemble.old[k, g] <- runif(1, lower.inits[g], upper.inits[g])
     }
     log.p.old[k] <- f(ensemble.old[k, ], ...)
   }
