@@ -28,13 +28,13 @@ p.log <- function(x) {
 
 ## use stretch move
 res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, method="s")
+                     max.iter=3000, n.walkers=10, method="stretch")
 str(res1)
 
 
 ## use stretch move, return samples as 'coda' object
 res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, method="s", coda=TRUE)
+                     max.iter=3000, n.walkers=10, method="stretch", coda=TRUE)
 
 summary(res2$samples)
 plot(res2$samples)
@@ -42,7 +42,8 @@ plot(res2$samples)
 
 ## use different evolution move, return samples as 'coda' object
 res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, method="d", coda=TRUE)
+                     max.iter=3000, n.walkers=10, 
+                     method="differential.evolution", coda=TRUE)
 
 summary(res3$samples)
 plot(res3$samples)
