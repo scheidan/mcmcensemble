@@ -20,7 +20,7 @@ test_that("multiplication works", {
   res2 <- MCMCEnsemble(p.log, lower.inits=c(0, 0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="s")
 
-  expect_identical(dimnames(res1$samples)[[3]], c("para_1", "para_2"))
+  expect_identical(dimnames(res2$samples)[[3]], c("para_1", "para_2"))
 
   res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="d", coda=TRUE)
