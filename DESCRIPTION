@@ -16,10 +16,10 @@ Authors@R:
              comment = c(ORCID = "0000-0003-2575-2172")))
 Description: Provides ensemble samplers for
     affine-invariant Monte Carlo Markov Chain, which allow a faster
-    convergence for badly scaled estimation problems.  Two samplers are
+    convergence for badly scaled estimation problems. Two samplers are
     proposed: the 'differential.evolution' sampler from ter Braak and
     Vrugt (2008) <doi:10.1007/s11222-008-9104-9> and the 'stretch' sampler
-    from Goodman and Weare (2010) <doi:10.2140/camcos.2010.5.65>
+    from Goodman and Weare (2010) <doi:10.2140/camcos.2010.5.65>.
 License: GPL-2
 URL: https://github.com/Bisaloo/MCMCEnsembleSampler
 BugReports: 
