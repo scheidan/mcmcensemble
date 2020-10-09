@@ -1,4 +1,4 @@
-# MCMCEnsembleSampler 2.0
+# mcmcensemble 2.0
 
 ## Breaking changes
 
@@ -11,5 +11,6 @@ of `MCMCEnsemble()`
 
 ## Dev changes
 
+* this package is now named mcmcensemble
 * roxygen2 documentation now uses markdown syntax
 * this package now has unit and regression tests
