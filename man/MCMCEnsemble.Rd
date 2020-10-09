@@ -16,45 +16,51 @@ MCMCEnsemble(
 )
 }
 \arguments{
-\item{f}{function that returns a value proportional to the log probability
-density to sample from.}
+\item{f}{function that returns a single scalar value proportional to the log
+probability density to sample from.}
 
-\item{lower.inits}{vector specifying for each parameters the lower value the initial distribution}
+\item{lower.inits}{vector specifying for each parameter the lower value the
+initial distribution.}
 
-\item{upper.inits}{vector specifying for each parameters the upper value the initial distribution}
+\item{upper.inits}{vector specifying for each parameter the upper value the
+initial distribution.}
 
 \item{max.iter}{maximum number of function evaluations}
 
 \item{n.walkers}{number of walkers (ensemble size)}
 
 \item{method}{method for proposal generation, either \code{"stretch"}, or
-\code{"differential.evolution"}. The first letter is sufficient.}
+\code{"differential.evolution"}.}
 
-\item{coda}{logical. Should the samples be returned as \code{link[coda]{mcmc.list}} object?}
+\item{coda}{logical. Should the samples be returned as \link[coda:mcmc.list]{coda::mcmc.list}
+object? (defaults to \code{FALSE})}
 
 \item{...}{further arguments passed to \code{f}}
 }
 \value{
 \itemize{
 \item if \code{coda = FALSE} a list with:
+}
 \itemize{
-\item \emph{samples}: A three dimensional array of samples with dimensions
-\code{walker} x \code{generation} x \code{parameter}
+\item \emph{samples}: A three dimensional array of samples with dimensions \code{walker} x
+\code{generation} x \code{parameter}
 \item \emph{log.p}: A matrix with the log density evaluate for each walker at each
 generation.
 }
+\itemize{
 \item if \code{coda = TRUE} a list with:
+}
 \itemize{
 \item \emph{samples}: A object of class \link[coda:mcmc.list]{coda::mcmc.list} containing all samples.
 \item \emph{log.p}: A matrix with the log density evaluate for each walker at each
 generation.
 }
 }
-}
 \description{
-Ensemble Markov Chain Monte Carlo sampler with different strategies to generate proposals.
-Either the \emph{stretch move} as proposed by Goodman and Weare (2010),
-or a \emph{differential evolution jump move} similar to Braak and Vrugt (2008).
+Ensemble Markov Chain Monte Carlo sampler with different strategies to
+generate proposals. Either the \emph{stretch move} as proposed by Goodman and
+Weare (2010), or a \emph{differential evolution jump move} similar to Braak and
+Vrugt (2008).
 }
 \examples{
 ## a log-pdf to sample from
@@ -88,10 +94,12 @@ plot(res3$samples)
 
 }
 \references{
-Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
-Chain with snooker updater and fewer chains. Statistics and Computing,
-18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
-Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
+\itemize{
+\item ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
+Chain with snooker updater and fewer chains. Statistics and Computing, 18(4),
+435–446, \doi{10.1007/s11222-008-9104-9}
+\item Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
 Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 \doi{10.2140/camcos.2010.5.65}
+}
 }

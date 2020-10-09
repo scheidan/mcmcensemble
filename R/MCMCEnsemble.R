@@ -1,29 +1,34 @@
 #' MCMC ensemble sampler
 #'
-#' Ensemble Markov Chain Monte Carlo sampler with different strategies to generate proposals.
-#' Either the *stretch move* as proposed by Goodman and Weare (2010),
-#' or a *differential evolution jump move* similar to Braak and Vrugt (2008).
+#' Ensemble Markov Chain Monte Carlo sampler with different strategies to
+#' generate proposals. Either the *stretch move* as proposed by Goodman and
+#' Weare (2010), or a *differential evolution jump move* similar to Braak and
+#' Vrugt (2008).
 #'
-#' @param f function that returns a value proportional to the log probability
-#' density to sample from.
-#' @param lower.inits vector specifying for each parameters the lower value the initial distribution
-#' @param upper.inits vector specifying for each parameters the upper value the initial distribution
+#' @param f function that returns a single scalar value proportional to the log
+#'   probability density to sample from.
+#' @param lower.inits vector specifying for each parameter the lower value the
+#'   initial distribution.
+#' @param upper.inits vector specifying for each parameter the upper value the
+#'   initial distribution.
 #' @param max.iter maximum number of function evaluations
 #' @param n.walkers number of walkers (ensemble size)
 #' @param method method for proposal generation, either `"stretch"`, or
-#' `"differential.evolution"`. The first letter is sufficient.
-#' @param coda logical. Should the samples be returned as \code{link[coda]{mcmc.list}} object?
+#'   `"differential.evolution"`.
+#' @param coda logical. Should the samples be returned as [coda::mcmc.list]
+#'   object? (defaults to `FALSE`)
 #' @param ... further arguments passed to `f`
+#'
 #' @return
 #' * if `coda = FALSE` a list with:
-#'   - *samples*: A three dimensional array of samples with dimensions
-#'     `walker` x `generation` x `parameter`
-#'    - *log.p*: A matrix with the log density evaluate for each walker at each
-#'       generation.
+#' - *samples*: A three dimensional array of samples with dimensions `walker` x
+#' `generation` x `parameter`
+#' - *log.p*: A matrix with the log density evaluate for each walker at each
+#' generation.
 #' * if `coda = TRUE` a list with:
-#'   - *samples*: A object of class [coda::mcmc.list] containing all samples.
-#'   - *log.p*: A matrix with the log density evaluate for each walker at each
-#'     generation.
+#' - *samples*: A object of class [coda::mcmc.list] containing all samples.
+#' - *log.p*: A matrix with the log density evaluate for each walker at each
+#' generation.
 #'
 #' @examples
 #' ## a log-pdf to sample from
@@ -58,10 +63,10 @@
 #' @export
 #'
 #' @references
-#' ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
-#' Chain with snooker updater and fewer chains. Statistics and Computing,
-#' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
-#' Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
+#' - ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
+#' Chain with snooker updater and fewer chains. Statistics and Computing, 18(4),
+#' 435–446, \doi{10.1007/s11222-008-9104-9}
+#' -  Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
 #' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 #' \doi{10.2140/camcos.2010.5.65}
 #'

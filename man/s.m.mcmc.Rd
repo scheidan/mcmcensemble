@@ -7,12 +7,14 @@
 s.m.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
 }
 \arguments{
-\item{f}{function that returns a value proportional to the log probability
-density to sample from.}
+\item{f}{function that returns a single scalar value proportional to the log
+probability density to sample from.}
 
-\item{lower.inits}{vector specifying for each parameters the lower value the initial distribution}
+\item{lower.inits}{vector specifying for each parameter the lower value the
+initial distribution.}
 
-\item{upper.inits}{vector specifying for each parameters the upper value the initial distribution}
+\item{upper.inits}{vector specifying for each parameter the upper value the
+initial distribution.}
 
 \item{max.iter}{maximum number of function evaluations}
 

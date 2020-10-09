@@ -9,6 +9,15 @@
 This package implements a particle Monte Carlo Markov Chain sampler
 with two different ways of creating proposals.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Bisaloo/MCMCEnsembleSampler}
+  \item \url{https://bisaloo.github.io/MCMCEnsembleSampler/}
+  \item Report bugs at \url{https://github.com/Bisaloo/MCMCEnsembleSampler/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Hugo Gruson \email{hugo.gruson+R@normalesup.org} (\href{https://orcid.org/0000-0002-4094-1476}{ORCID}) [copyright holder]
 

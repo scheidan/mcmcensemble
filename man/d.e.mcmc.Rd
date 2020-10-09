@@ -7,12 +7,14 @@
 d.e.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
 }
 \arguments{
-\item{f}{function that returns a value proportional to the log probability
-density to sample from.}
+\item{f}{function that returns a single scalar value proportional to the log
+probability density to sample from.}
 
-\item{lower.inits}{vector specifying for each parameters the lower value the initial distribution}
+\item{lower.inits}{vector specifying for each parameter the lower value the
+initial distribution.}
 
-\item{upper.inits}{vector specifying for each parameters the upper value the initial distribution}
+\item{upper.inits}{vector specifying for each parameter the upper value the
+initial distribution.}
 
 \item{max.iter}{maximum number of function evaluations}
 
@@ -32,7 +34,7 @@ Markov Chain Monte Carlo sampler: using the differential evolution jump move
 (implementation of the Ter Braak differential evolution)
 }
 \references{
-Braak, C. J. F. ter and Vrugt, J. A. (2008) Differential Evolution Markov
+ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
 Chain with snooker updater and fewer chains. Statistics and Computing,
 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
 .
