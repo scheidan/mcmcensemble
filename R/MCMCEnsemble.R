@@ -118,7 +118,8 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
       )
     }
 
-    ll <- lapply(seq_len(n.walkers), function(w) coda::as.mcmc(res$samples[w, , ]))
+    ll <- lapply(seq_len(n.walkers),
+                 function(w) coda::as.mcmc(res$samples[w, , ]))
     res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
 
