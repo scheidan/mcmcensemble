@@ -25,12 +25,11 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   chain.length <- max.iter %/% n.walkers
 
-  log.p <- matrix(NA, nrow = n.walkers, ncol = chain.length)
-  log.p.old <- rep(NA, n.walkers)
-  ensemble.old <- matrix(NA, nrow = n.walkers, ncol = n.dim)
-  ensemble.new <- matrix(NA, nrow = n.walkers, ncol = n.dim)
-  samples <- array(NA, dim = c(n.walkers, chain.length, n.dim))
-  mcmc.object <- array(NA, dim = c(n.walkers, chain.length, n.dim + 1))
+  log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
+  log.p.old <- rep(NA_real_, n.walkers)
+  ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
+  ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
+  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
 
   ensemble.old[1, ] <- runif(n.dim, lower.inits, upper.inits)
   logres <- f(ensemble.old[1, ], ...)
