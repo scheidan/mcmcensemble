@@ -59,14 +59,11 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
       }
 
       if (acc > runif(1)) {
-        samples[n, l, ] <- ensemble.new[n, ]
         ensemble.old[n, ] <- ensemble.new[n, ]
-        log.p[n, l] <- log.p.new
         log.p.old[n] <- log.p.new
-      } else {
-        samples[n, l, ] <- ensemble.old[n, ]
-        log.p[n, l] <- log.p.old[n]
       }
+      samples[n, l, ] <- ensemble.old[n, ]
+      log.p[n, l] <- log.p.old[n]
     }
   }
 
