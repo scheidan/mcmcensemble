@@ -1,4 +1,4 @@
-Package: MCMCEnsembleSampler
+Package: mcmcensemble
 Title: Ensemble Sampler for Affine-Invariant MCMC
 Version: 2.0
 Authors@R: 

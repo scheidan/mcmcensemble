@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 set.seed(18052020)
 ```
 
-# MCMC Ensemble Sampler
+# mcmcensemble
 
 <!-- badges: start -->
-[![R build status](https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/MCMCEnsembleSampler/actions)
-[![Codecov test coverage](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler?branch=master)
+[![R build status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
+[![Codecov test coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master)
 <!-- badges: end -->
 
 This R package provides ensemble samplers for affine-invariant Monte Carlo
@@ -32,13 +32,13 @@ problems. Two samplers are proposed: the 'differential.evolution' sampler from
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("Bisaloo/MCMCEnsembleSampler")
+remotes::install_github("Bisaloo/mcmcensemble")
 ```
 
 ## Usage
 
 ```{r}
-library(MCMCEnsembleSampler)
+library(mcmcensemble)
 
 ## a log-pdf to sample from
 p.log <- function(x) {

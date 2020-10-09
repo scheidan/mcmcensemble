@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MCMC Ensemble Sampler
+# mcmcensemble
 
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/MCMCEnsembleSampler/actions)
+status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler?branch=master)
+coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master)
 <!-- badges: end -->
 
 This R package provides ensemble samplers for affine-invariant Monte
@@ -23,13 +23,13 @@ sampler from [Goodman and Weare
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Bisaloo/MCMCEnsembleSampler")
+remotes::install_github("Bisaloo/mcmcensemble")
 ```
 
 ## Usage
 
 ``` r
-library(MCMCEnsembleSampler)
+library(mcmcensemble)
 
 ## a log-pdf to sample from
 p.log <- function(x) {
