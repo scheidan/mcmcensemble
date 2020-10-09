@@ -1,4 +1,4 @@
 library(testthat)
-library(MCMCEnsembleSampler)
+library(mcmcensemble)
 
-test_check("MCMCEnsembleSampler")
+test_check("mcmcensemble")
