@@ -41,4 +41,13 @@ test_that("multiplication works", {
     "coda"
   )
 
+  fw <- function (x) {
+    10*sin(0.3*x)*sin(1.3*x^2) + 0.00001*x^4 + 0.2*x+80
+  }
+
+  expect_error(
+    MCMCEnsemble(fw, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
+                 max.iter=3000, n.walkers=10, method="s"),
+    "numeric of length 1"
+  )
 })

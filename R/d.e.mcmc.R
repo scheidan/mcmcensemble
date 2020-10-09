@@ -34,7 +34,14 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   samples <- array(NA, dim = c(n.walkers, chain.length, n.dim))
   mcmc.object <- array(NA, dim = c(n.walkers, chain.length, n.dim + 1))
 
-  for (k in 1:n.walkers) {
+  ensemble.old[1, ] <- runif(n.dim, lower.inits, upper.inits)
+  logres <- f(ensemble.old[1, ], ...)
+  if (length(logres) != 1 || !is.numeric(logres)) {
+    stop("Function 'f' should return a numeric of length 1", call. = FALSE)
+  }
+  log.p.old[1] <- logres
+
+  for (k in 2:n.walkers) {
     ensemble.old[k, ] <- runif(n.dim, lower.inits, upper.inits)
     log.p.old[k] <- f(ensemble.old[k, ], ...)
   }
