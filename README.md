@@ -100,10 +100,9 @@ summary(res2$samples)
 plot(res2$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
+<img src="man/figures/README-example-stretch-1.svg" width="100%" />
 
 ``` r
-
 ## use different evolution move, return samples as 'coda' object
 res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, 
@@ -132,7 +131,7 @@ summary(res3$samples)
 plot(res3$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-2.svg" width="100%" />
+<img src="man/figures/README-example-de-1.svg" width="100%" />
 
 ## Similar projects
 
