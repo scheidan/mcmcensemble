@@ -17,6 +17,7 @@ set.seed(18052020)
 # mcmcensemble
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version-ago/mcmcensemble)](https://CRAN.R-project.org/package=mcmcensemble)
 [![R build status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
 [![Codecov test coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
@@ -30,6 +31,14 @@ problems. Two samplers are proposed: the 'differential.evolution' sampler from
 (2010)](https://doi.org/10.2140/camcos.2010.5.65).
 
 ## Installation
+
+You can install the stable version of this package from CRAN:
+
+```{r, eval = FALSE}
+install.packages("mcmcensemble")
+```
+
+or the development version from GitHub:
 
 ```{r, eval = FALSE}
 # install.packages("remotes")

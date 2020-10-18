@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version-ago/mcmcensemble)](https://CRAN.R-project.org/package=mcmcensemble)
 [![R build
 status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
 [![Codecov test
@@ -22,6 +24,14 @@ sampler from [Goodman and Weare
 (2010)](https://doi.org/10.2140/camcos.2010.5.65).
 
 ## Installation
+
+You can install the stable version of this package from CRAN:
+
+``` r
+install.packages("mcmcensemble")
+```
+
+or the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
@@ -90,7 +100,7 @@ summary(res2$samples)
 plot(res2$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
 
 ``` r
 
@@ -122,7 +132,7 @@ summary(res3$samples)
 plot(res3$samples)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-2.svg" width="100%" />
 
 ## Similar projects
 
