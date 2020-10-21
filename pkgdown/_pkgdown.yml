@@ -1,3 +1,5 @@
+url: https://bisaloo.github.io/mcmcensemble/
+
 template:
   params:
     bootswatch: flatly
