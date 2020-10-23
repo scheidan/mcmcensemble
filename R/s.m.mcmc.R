@@ -68,9 +68,9 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
         ensemble.old[n, ] <- ensemble.new[n, ]
         log.p.old[n] <- log.p.new
       }
-      samples[n, l, ] <- ensemble.old[n, ]
-      log.p[n, l] <- log.p.old[n]
     }
+    samples[, l, ] <- ensemble.old
+    log.p[, l] <- log.p.old
   }
 
   mcmc.list <- list(samples = samples, log.p = log.p)
