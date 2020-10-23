@@ -1,3 +1,9 @@
+# mcmcesemble 2.1
+
+## Dev changes
+
+* performance improvements
+
 # mcmcensemble 2.0
 
 ## Breaking changes
