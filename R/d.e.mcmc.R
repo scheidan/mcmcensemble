@@ -51,11 +51,13 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   ## the loop
 
   for (l in 2:chain.length) {
+
+    z <- 2.38 / sqrt(2 * n.dim)
+    if (l %% 10 == 0) {
+      z <- 1
+    }
+
     for (n in 1:n.walkers) {
-      z <- 2.38 / sqrt(2 * n.dim)
-      if (l %% 10 == 0) {
-        z <- 1
-      }
 
       # Performance note: it's faster to sample() once and set subset s instead
       # of doing it twice
@@ -79,8 +81,10 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
         log.p.old[n] <- log.p.new
       }
     }
+
     samples[, l, ] <- ensemble.old
     log.p[, l] <- log.p.old
+
   }
 
   mcmc.list <- list(samples = samples, log.p = log.p)
