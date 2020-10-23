@@ -57,11 +57,12 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
         z <- 1
       }
 
-      a <- sample((1:n.walkers)[-n], 1)
-      b <- sample((1:n.walkers)[-c(n, a)], 1)
+      # Performance note: it's faster to sample() once and set subset s instead
+      # of doing it twice
+      s <- sample((1:n.walkers)[-n], 2, replace = FALSE)
 
-      par.active.1 <- ensemble.old[a, ]
-      par.active.2 <- ensemble.old[b, ]
+      par.active.1 <- ensemble.old[s[1], ]
+      par.active.2 <- ensemble.old[s[2], ]
 
       ensemble.new[n, ] <- ensemble.old[n, ] + z * (par.active.1 - par.active.2)
 
