@@ -64,11 +64,9 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     }
 
-    val <- ifelse(
-      is.finite(log.p.new),
-      z^(n.dim - 1) * exp(log.p.new - log.p.old),
-      0
-    )
+    val <- z^(n.dim - 1) * exp(log.p.new - log.p.old)
+
+    val[!is.finite(val)] <- 0
 
     acc <- val > runif(n.walkers)
 

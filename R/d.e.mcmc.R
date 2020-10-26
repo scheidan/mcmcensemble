@@ -73,11 +73,9 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     }
 
-    val <- ifelse(
-      is.finite(log.p.new),
-      exp(log.p.new - log.p.old),
-      0
-    )
+    val <- exp(log.p.new - log.p.old)
+
+    val[!is.finite(val)] <- 0
 
     acc <- val > runif(n.walkers)
 
