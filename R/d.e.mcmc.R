@@ -28,7 +28,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   chain.length <- max.iter %/% n.walkers
 
   log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
-  log.p.old <- rep(NA_real_, n.walkers)
+  log.p.old <- rep_len(NA_real_, n.walkers)
   log.p.new <- rep_len(NA_real_, n.walkers)
   ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
