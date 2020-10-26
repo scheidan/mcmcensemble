@@ -33,6 +33,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
+  s <- matrix(NA_integer_, nrow = n.walkers, ncol = 2)
 
   ensemble.old[1, ] <- runif(n.dim, lower.inits, upper.inits)
   logres <- f(ensemble.old[1, ], ...)
@@ -62,12 +63,16 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
       # Performance note: it's faster to sample() once and set subset s instead
       # of doing it twice
-      s <- sample((1:n.walkers)[-n], 2, replace = FALSE)
+      s[n, ] <- sample((1:n.walkers)[-n], 2, replace = FALSE)
 
-      par.active.1 <- ensemble.old[s[1], ]
-      par.active.2 <- ensemble.old[s[2], ]
+    }
 
-      ensemble.new[n, ] <- ensemble.old[n, ] + z * (par.active.1 - par.active.2)
+    par.active.1 <- ensemble.old[s[, 1], ]
+    par.active.2 <- ensemble.old[s[, 2], ]
+
+    ensemble.new <- ensemble.old + z * (par.active.1 - par.active.2)
+
+    for (n in 1:n.walkers) {
 
       log.p.new[n] <- f(ensemble.new[n, ], ...)
 

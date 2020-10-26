@@ -31,6 +31,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
+  a <- rep_len(NA_integer_, n.walkers)
 
   ensemble.old[1, ] <- runif(n.dim, lower.inits, upper.inits)
   logres <- f(ensemble.old[1, ], ...)
@@ -55,10 +56,15 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     for (n in 1:n.walkers) {
 
-      a <- sample((1:n.walkers)[-n], 1)
-      par.active <- ensemble.old[a, ]
+      a[n] <- sample((1:n.walkers)[-n], 1)
 
-      ensemble.new[n, ] <- par.active + z[n] * (ensemble.old[n, ] - par.active)
+    }
+
+    par.active <- ensemble.old[a, ]
+
+    ensemble.new <- par.active + z * (ensemble.old - par.active)
+
+    for (n in 1:n.walkers) {
 
       log.p.new[n] <- f(ensemble.new[n, ], ...)
 
