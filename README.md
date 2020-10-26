@@ -88,15 +88,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>       Mean    SD Naive SE Time-series SE
-#> a -0.99617 9.404  0.17169         1.1082
-#> b  0.08097 3.802  0.06941         0.5324
+#>     Mean    SD Naive SE Time-series SE
+#> a 1.1145 9.035  0.16495         1.1388
+#> b 0.3263 3.225  0.05888         0.3215
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%     25%     50%   75% 97.5%
-#> a -20.18 -6.6065 0.01745 5.148 17.65
-#> b -10.22 -0.9395 1.25350 2.573  4.29
+#>      2.5%     25%   50%   75%  97.5%
+#> a -15.741 -5.0626 1.077 7.146 20.463
+#> b  -9.213 -0.7261 1.116 2.425  4.297
 plot(res2$samples)
 ```
 
@@ -120,14 +120,14 @@ summary(res3$samples)
 #>    plus standard error of the mean:
 #> 
 #>      Mean    SD Naive SE Time-series SE
-#> a -0.6493 8.119  0.14824          0.631
-#> b  1.0218 2.408  0.04397          0.218
+#> a -0.3914 9.302   0.1698         0.8171
+#> b  0.3364 3.610   0.0659         0.4361
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%      25%    50%   75%  97.5%
-#> a -14.947 -6.59386 -1.001 5.112 16.622
-#> b  -5.064 -0.08247  1.645 2.747  4.148
+#>     2.5%     25%    50%   75%  97.5%
+#> a -19.72 -6.3315 -1.066 6.187 17.223
+#> b -11.49 -0.7183  1.408 2.651  4.198
 plot(res3$samples)
 ```
 
