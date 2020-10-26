@@ -29,6 +29,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
   log.p.old <- rep(NA_real_, n.walkers)
+  log.p.new <- rep_len(NA_real_, n.walkers)
   ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
@@ -68,19 +69,20 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
       ensemble.new[n, ] <- ensemble.old[n, ] + z * (par.active.1 - par.active.2)
 
-      log.p.new <- f(ensemble.new[n, ], ...)
-      if (!is.finite(log.p.new)) {
-        acc <- 0
-      }
-      else {
-        acc <- exp(log.p.new - log.p.old[n])
-      }
+      log.p.new[n] <- f(ensemble.new[n, ], ...)
 
-      if (acc > runif(1)) {
-        ensemble.old[n, ] <- ensemble.new[n, ]
-        log.p.old[n] <- log.p.new
-      }
     }
+
+    val <- ifelse(
+      is.finite(log.p.new),
+      exp(log.p.new - log.p.old),
+      0
+    )
+
+    acc <- val > runif(n.walkers)
+
+    ensemble.old[acc, ] <- ensemble.new[acc, ]
+    log.p.old[acc] <- log.p.new[acc]
 
     samples[, l, ] <- ensemble.old
     log.p[, l] <- log.p.old
