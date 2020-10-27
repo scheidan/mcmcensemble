@@ -29,7 +29,6 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
   log.p.old <- rep_len(NA_real_, n.walkers)
-  log.p.new <- rep_len(NA_real_, n.walkers)
   ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   ensemble.new <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
   samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
@@ -72,11 +71,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     ensemble.new <- ensemble.old + z * (par.active.1 - par.active.2)
 
-    for (n in 1:n.walkers) {
-
-      log.p.new[n] <- f(ensemble.new[n, ], ...)
-
-    }
+    log.p.new <- apply(ensemble.new, 1, f, ...)
 
     val <- exp(log.p.new - log.p.old)
 
