@@ -27,23 +27,21 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   chain.length <- max.iter %/% n.walkers
 
-  log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
-  log.p.old <- rep_len(NA_real_, n.walkers)
-  ensemble.old <- matrix(NA_real_, nrow = n.walkers, ncol = n.dim)
-  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
   s <- matrix(NA_integer_, nrow = n.walkers, ncol = 2)
 
-  ensemble.old[1, ] <- runif(n.dim, lower.inits, upper.inits)
-  logres <- f(ensemble.old[1, ], ...)
-  if (length(logres) != 1 || !is.numeric(logres)) {
+  ensemble.old <- matrix(
+    runif(n.dim, lower.inits, upper.inits),
+    nrow = n.walkers,
+    ncol = n.dim
+  )
+  log.p.old <- apply(ensemble.old, 1, f)
+
+  if (!is.vector(log.p.old, mode = "numeric")) {
     stop("Function 'f' should return a numeric of length 1", call. = FALSE)
   }
-  log.p.old[1] <- logres
 
-  for (k in 2:n.walkers) {
-    ensemble.old[k, ] <- runif(n.dim, lower.inits, upper.inits)
-    log.p.old[k] <- f(ensemble.old[k, ], ...)
-  }
+  log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
+  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
 
   log.p[, 1] <- log.p.old
   samples[, 1, ] <- ensemble.old
