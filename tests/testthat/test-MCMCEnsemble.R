@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("mcmcensemble", {
 
   p.log <- function(x) {
     B <- 0.03
