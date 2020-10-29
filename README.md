@@ -139,6 +139,19 @@ plot(res3$samples)
 
 <img src="man/figures/README-example-de-1.svg" width="100%" />
 
+## Parallel processing
+
+This package is set up to allow transparent parallel processing when
+requested by the user thanks to the framework provided by the
+[future](https://cran.r-project.org/package=future) package. To enable
+parallel processing, you must run:
+
+``` r
+future::plan("multiprocess")
+```
+
+at the start of your session.
+
 ## Similar projects
 
 The methods used in this package also have (independent) implementations

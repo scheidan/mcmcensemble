@@ -3,4 +3,5 @@
 export(MCMCEnsemble)
 export(d.e.mcmc)
 export(s.m.mcmc)
+importFrom(future.apply,future_apply)
 importFrom(stats,runif)

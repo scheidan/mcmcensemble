@@ -19,7 +19,9 @@
 #' ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov
 #' Chain with snooker updater and fewer chains. Statistics and Computing,
 #' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
-#' .
+#'
+#' @importFrom future.apply future_apply
+#'
 d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   n.dim <- length(lower.inits)
@@ -32,7 +34,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
     nrow = n.walkers,
     ncol = n.dim
   )
-  log.p.old <- apply(ensemble.old, 1, f)
+  log.p.old <- future_apply(ensemble.old, 1, f, ...)
 
   if (!is.vector(log.p.old, mode = "numeric")) {
     stop("Function 'f' should return a numeric of length 1", call. = FALSE)
@@ -64,7 +66,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     ensemble.new <- ensemble.old + z * (par.active.1 - par.active.2)
 
-    log.p.new <- apply(ensemble.new, 1, f, ...)
+    log.p.new <- future_apply(ensemble.new, 1, f, ...)
 
     val <- exp(log.p.new - log.p.old)
 

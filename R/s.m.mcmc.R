@@ -18,6 +18,8 @@
 #' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 #' \doi{10.2140/camcos.2010.5.65}
 #'
+#' @importFrom future.apply future_apply
+#'
 s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   n.dim <- length(lower.inits)
@@ -30,7 +32,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
     nrow = n.walkers,
     ncol = n.dim
   )
-  log.p.old <- apply(ensemble.old, 1, f)
+  log.p.old <- future_apply(ensemble.old, 1, f, ...)
 
   if (!is.vector(log.p.old, mode = "numeric")) {
     stop("Function 'f' should return a numeric of length 1", call. = FALSE)
@@ -58,7 +60,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     ensemble.new <- par.active + z * (ensemble.old - par.active)
 
-    log.p.new <- apply(ensemble.new, 1, f, ...)
+    log.p.new <- future_apply(ensemble.new, 1, f, ...)
 
     val <- z^(n.dim - 1) * exp(log.p.new - log.p.old)
 

@@ -1,5 +1,10 @@
 # mcmcesemble 2.1
 
+## Major changes
+
+* the ensemble sampling can now be parallelized with the future framework. Check
+the README for more information
+
 ## Dev changes
 
 * performance improvements
