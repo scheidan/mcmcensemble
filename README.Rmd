@@ -30,6 +30,11 @@ problems. Two samplers are proposed: the 'differential.evolution' sampler from
 'stretch' sampler from [Goodman and Weare
 (2010)](https://doi.org/10.2140/camcos.2010.5.65).
 
+For theoretical background about Ensemble MCMC (what are the benefits over
+simple MCMC? How do they work? What are the pitfalls?), please refer for example to 
+[this lecture](https://astrostatistics.psu.edu/su14/lectures/HierarchicalBayesianModelingEnsembleMCMC.pdf)
+from Eric B. Ford (Penn State).
+
 ## Installation
 
 You can install the stable version of this package from CRAN:
