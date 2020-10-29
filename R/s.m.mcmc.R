@@ -25,8 +25,6 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   chain.length <- max.iter %/% n.walkers
 
-  a <- rep_len(NA_integer_, n.walkers)
-
   ensemble.old <- matrix(
     runif(n.dim, lower.inits, upper.inits),
     nrow = n.walkers,
@@ -50,11 +48,11 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     z <- ((runif(n.walkers) + 1)^2) / 2
 
-    for (n in 1:n.walkers) {
-
-      a[n] <- sample((1:n.walkers)[-n], 1)
-
-    }
+    a <- vapply(
+      seq_len(n.walkers),
+      function(n) sample((1:n.walkers)[-n], 1),
+      integer(1)
+    )
 
     par.active <- ensemble.old[a, ]
 

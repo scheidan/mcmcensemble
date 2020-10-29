@@ -27,8 +27,6 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   chain.length <- max.iter %/% n.walkers
 
-  s <- matrix(NA_integer_, nrow = n.walkers, ncol = 2)
-
   ensemble.old <- matrix(
     runif(n.dim, lower.inits, upper.inits),
     nrow = n.walkers,
@@ -55,16 +53,14 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
       z <- 1
     }
 
-    for (n in 1:n.walkers) {
+    s <- vapply(
+      seq_len(n.walkers),
+      function(n) sample((1:n.walkers)[-n], 2, replace = FALSE),
+      integer(2)
+    )
 
-      # Performance note: it's faster to sample() once and set subset s instead
-      # of doing it twice
-      s[n, ] <- sample((1:n.walkers)[-n], 2, replace = FALSE)
-
-    }
-
-    par.active.1 <- ensemble.old[s[, 1], ]
-    par.active.2 <- ensemble.old[s[, 2], ]
+    par.active.1 <- ensemble.old[s[1, ], ]
+    par.active.2 <- ensemble.old[s[2, ], ]
 
     ensemble.new <- ensemble.old + z * (par.active.1 - par.active.2)
 
