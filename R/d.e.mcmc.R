@@ -30,10 +30,12 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   chain.length <- max.iter %/% n.walkers
 
   ensemble.old <- matrix(
-    runif(n.dim, lower.inits, upper.inits),
+    runif(n.dim*n.walkers, lower.inits, upper.inits),
     nrow = n.walkers,
-    ncol = n.dim
+    ncol = n.dim,
+    byrow = TRUE
   )
+
   log.p.old <- future_apply(ensemble.old, 1, f, ...)
 
   if (!is.vector(log.p.old, mode = "numeric")) {
