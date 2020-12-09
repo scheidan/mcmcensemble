@@ -40,8 +40,13 @@ res1 <- MCMCEnsemble(
 )
 
 summary(res1$samples)
-plot(res1$samples)
+```
 
+```{r, eval = identical(Sys.getenv("IN_PKGDOWN"), "true")}
+plot(res1$samples)
+```
+
+```{r}
 res2 <- MCMCEnsemble(
   p.log,
   lower.inits = c(a = -10, b = -10), upper.inits = c(a = -5, b = -5),
@@ -51,5 +56,8 @@ res2 <- MCMCEnsemble(
 )
 
 summary(res2$samples)
+```
+
+```{r, eval = identical(Sys.getenv("IN_PKGDOWN"), "true")}
 plot(res2$samples)
 ```
