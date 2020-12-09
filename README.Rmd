@@ -112,3 +112,7 @@ other languages:
 
 - emcee in Python (<https://doi.org/10.21105/joss.01864>)
 - gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
+
+## Who is talking about this package?
+
+- [R View from October 2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)

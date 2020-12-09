@@ -94,15 +94,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>     Mean    SD Naive SE Time-series SE
-#> a 1.1145 9.035  0.16495         1.1388
-#> b 0.3263 3.225  0.05888         0.3215
+#>      Mean     SD Naive SE Time-series SE
+#> a  2.5369 10.520  0.19206         1.2490
+#> b -0.5984  4.575  0.08352         0.7117
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%     25%   50%   75%  97.5%
-#> a -15.741 -5.0626 1.077 7.146 20.463
-#> b  -9.213 -0.7261 1.116 2.425  4.297
+#>     2.5%    25%   50%   75%  97.5%
+#> a -17.10 -4.510 1.784 8.983 23.321
+#> b -13.12 -2.091 1.080 2.633  4.066
 plot(res2$samples)
 ```
 
@@ -125,15 +125,15 @@ summary(res3$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>      Mean    SD Naive SE Time-series SE
-#> a -0.3914 9.302   0.1698         0.8171
-#> b  0.3364 3.610   0.0659         0.4361
+#>     Mean    SD Naive SE Time-series SE
+#> a 0.8694 8.912  0.16270         0.8364
+#> b 0.5526 3.038  0.05547         0.3271
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%     25%    50%   75%  97.5%
-#> a -19.72 -6.3315 -1.066 6.187 17.223
-#> b -11.49 -0.7183  1.408 2.651  4.198
+#>      2.5%     25%    50%   75%  97.5%
+#> a -16.052 -5.9044 0.4582 7.608 18.078
+#> b  -8.126 -0.8741 1.4248 2.607  4.136
 plot(res3$samples)
 ```
 
@@ -159,3 +159,8 @@ in other languages:
 
   - emcee in Python (<https://doi.org/10.21105/joss.01864>)
   - gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
+
+## Who is talking about this package?
+
+  - [R View from
+    October 2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
