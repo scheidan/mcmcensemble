@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(mcmcensemble)
 ```
 
-# Can the estimations go beyond `lower.inits` and `upper.inits`?
+# Can estimations go beyond `lower.inits` and `upper.inits`?
 
 **YES**
 
