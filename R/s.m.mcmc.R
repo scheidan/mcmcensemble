@@ -34,7 +34,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
     byrow = TRUE
   )
 
-  log.p.old <- apply(ensemble.old, 1, f, ...)
+  log.p.old <- future_apply(ensemble.old, 1, f, ...)
 
   if (!is.vector(log.p.old, mode = "numeric")) {
     stop("Function 'f' should return a numeric of length 1", call. = FALSE)
@@ -62,7 +62,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     ensemble.new <- par.active + z * (ensemble.old - par.active)
 
-    log.p.new <- apply(ensemble.new, 1, f, ...)
+    log.p.new <- future_apply(ensemble.new, 1, f, ...)
 
     val <- z^(n.dim - 1) * exp(log.p.new - log.p.old)
 
