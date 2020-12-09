@@ -1,0 +1,55 @@
+---
+title: "Frequently Asked Questions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Frequently Asked Questions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mcmcensemble)
+```
+
+# Can the estimations go beyond `lower.inits` and `upper.inits`?
+
+**YES**
+
+```{r, eval = require("coda")}
+## a log-pdf to sample from
+p.log <- function(x) {
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1 / 2 * (x[2] + B * x[1]^2 - 100 * B)^2
+}
+
+set.seed(20201209)
+
+res1 <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = -10, b = -10), upper.inits = c(a = -5, b = -5),
+  max.iter = 3000, n.walkers = 10,
+  method = "stretch",
+  coda = TRUE
+)
+
+summary(res1$samples)
+plot(res1$samples)
+
+res2 <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = -10, b = -10), upper.inits = c(a = -5, b = -5),
+  max.iter = 3000, n.walkers = 10,
+  method = "differential.evolution",
+  coda = TRUE
+)
+
+summary(res2$samples)
+plot(res2$samples)
+```

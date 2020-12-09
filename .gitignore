@@ -39,3 +39,4 @@ vignettes/*.pdf
 # End of https://www.gitignore.io/api/r
 
 CRAN-RELEASE
+inst/doc
