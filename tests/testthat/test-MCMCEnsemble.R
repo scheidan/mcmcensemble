@@ -1,9 +1,9 @@
-test_that("mcmcensemble", {
+p.log <- function(x) {
+  B <- 0.03
+  return(-x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2)
+}
 
-  p.log <- function(x) {
-    B <- 0.03
-    return(-x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2)
-  }
+test_that("mcmcensemble", {
 
   res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="s")
