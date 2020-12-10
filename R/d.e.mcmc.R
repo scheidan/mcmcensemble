@@ -29,6 +29,8 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   chain.length <- max.iter %/% n.walkers
 
+  p <- progressor(chain.length)
+
   ensemble.old <- matrix(
     runif(n.dim*n.walkers, lower.inits, upper.inits),
     nrow = n.walkers,
@@ -47,6 +49,8 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   log.p[, 1] <- log.p.old
   samples[, 1, ] <- ensemble.old
+
+  p()
 
   ## the loop
 
@@ -81,6 +85,8 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     samples[, l, ] <- ensemble.old
     log.p[, l] <- log.p.old
+
+    p()
 
   }
 

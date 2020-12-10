@@ -25,7 +25,8 @@ URL: https://github.com/Bisaloo/mcmcensemble, https://bisaloo.github.io/mcmcense
 BugReports: 
     https://github.com/Bisaloo/mcmcensemble/issues
 Imports:
-    future.apply
+    future.apply,
+    progressr
 Suggests: 
     coda,
     mockery,
