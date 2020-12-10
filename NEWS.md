@@ -5,6 +5,11 @@
 * the ensemble sampling can now be parallelized with the future framework. Check
 the [README](https://bisaloo.github.io/mcmcensemble/) for more information
 
+## Other user-facing changes
+
+* addition of a new vignette listing frequently asked questions (with their
+answer)
+
 ## Dev changes
 
 * performance improvements
