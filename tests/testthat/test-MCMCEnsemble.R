@@ -27,6 +27,9 @@ test_that("mcmcensemble", {
 
   expect_s3_class(res3$samples, "mcmc.list")
 
+})
+
+test_that("errors", {
   expect_error(
     MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1),
                  max.iter=3000, n.walkers=10, method="d"),
