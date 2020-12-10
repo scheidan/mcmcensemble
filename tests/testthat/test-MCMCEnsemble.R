@@ -50,4 +50,10 @@ test_that("mcmcensemble", {
                  max.iter=3000, n.walkers=10, method="s"),
     "numeric of length 1"
   )
+
+  expect_error(
+    MCMCEnsemble(fw, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
+                 max.iter=3000, n.walkers=10, method="d"),
+    "numeric of length 1"
+  )
 })
