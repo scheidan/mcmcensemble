@@ -1,7 +1,7 @@
 #' MCMC Ensemble sampler with the differential evolution jump move
 #'
 #' Markov Chain Monte Carlo sampler: using the differential evolution jump move
-#' (implementation of the Ter Braak differential evolution)
+#' (implementation of the ter Braak differential evolution)
 #'
 #' @inheritParams MCMCEnsemble
 #'
