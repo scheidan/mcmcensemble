@@ -90,7 +90,6 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   }
 
-  mcmc.list <- list(samples = samples, log.p = log.p)
+  return(list(samples = samples, log.p = log.p))
 
-  return(mcmc.list)
 }

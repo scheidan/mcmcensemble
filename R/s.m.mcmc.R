@@ -84,7 +84,6 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
     p()
   }
 
-  mcmc.list <- list(samples = samples, log.p = log.p)
+  return(list(samples = samples, log.p = log.p))
 
-  return(mcmc.list)
 }
