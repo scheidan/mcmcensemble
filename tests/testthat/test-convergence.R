@@ -1,15 +1,15 @@
 skip_on_cran()
 skip_on_ci()
+skip_if_not_installed("mvtnorm")
 
 target <- runif(2, min = -50, max = 50)
 
 p.log <- function(x) {
-  mvtnorm::dmvnorm(x, target, sigma = diag(2), log = TRUE)
+  dmvnorm(x, target, sigma = diag(2), log = TRUE)
 }
 
 test_that("convergence stretch", {
 
-  tictoc::tic()
   mcmcres <- MCMCEnsemble(
     p.log,
     lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
@@ -17,7 +17,6 @@ test_that("convergence stretch", {
     method="stretch",
     coda=TRUE
   )
-  tictoc::toc()
 
   expect_true(
     all(
@@ -34,7 +33,6 @@ test_that("convergence stretch", {
 
 test_that("convergence differencial evolution", {
 
-  tictoc::tic()
   mcmcres <- MCMCEnsemble(
     p.log,
     lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
@@ -42,7 +40,6 @@ test_that("convergence differencial evolution", {
     method="d",
     coda=TRUE
   )
-  tictoc::toc()
 
   expect_true(
     all(
