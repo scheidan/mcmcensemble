@@ -14,6 +14,7 @@ answer)
 
 ## Dev changes
 
+* new test to make sure the chains converge as expected
 * performance improvements
 
 # mcmcensemble 2.0
