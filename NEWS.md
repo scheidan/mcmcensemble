@@ -7,6 +7,8 @@ the [README](https://bisaloo.github.io/mcmcensemble/) for more information
 
 ## Other user-facing changes
 
+* very large log.p differences between chains do not cause them to be
+stuck any more
 * addition of a new vignette listing frequently asked questions (with their
 answer)
 

@@ -76,9 +76,10 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     val <- exp(log.p.new - log.p.old)
 
-    val[!is.finite(val)] <- 0
-
-    acc <- val > runif(n.walkers)
+    # We don't want to get rid of Inf values since +Inf is a valid value to
+    # accept a change. If we forbid, we are actually forbidding large log.p
+    # changes.
+    acc <- !is.na(val) & val > runif(n.walkers)
 
     ensemble.old[acc, ] <- ensemble.new[acc, ]
     log.p.old[acc] <- log.p.new[acc]
