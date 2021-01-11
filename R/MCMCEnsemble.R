@@ -75,8 +75,6 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
                          method = c("stretch", "differential.evolution"),
                          coda = FALSE, ...) {
 
-  n.dim <- length(lower.inits)
-  init.range <- cbind(lower.inits, upper.inits)
   if (length(lower.inits) != length(upper.inits) ||
       isTRUE(names(lower.inits) != names(upper.inits))) {
     stop(
@@ -98,7 +96,7 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
 
   ## add names
   if (is.null(names(lower.inits))) {
-    pnames <- paste0("para_", 1:n.dim)
+    pnames <- paste0("para_", seq_along(lower.inits))
   } else {
     pnames <- names(lower.inits)
   }
