@@ -60,3 +60,23 @@ test_that("errors", {
     "numeric of length 1"
   )
 })
+
+test_that("named arguments", {
+
+  set.seed(20200111)
+  res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
+                       max.iter=3000, n.walkers=10, method="s")
+
+  p.log.named <- function(x) {
+    B <- 0.03
+    return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
+  }
+
+  set.seed(20200111)
+  res2 <- MCMCEnsemble(p.log.named, lower.inits=c(a=0, b=0),
+                       upper.inits=c(a=1, b=1), max.iter=3000, n.walkers=10,
+                       method="s")
+
+  expect_identical(res1, res2)
+
+})

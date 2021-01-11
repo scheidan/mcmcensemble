@@ -1,5 +1,17 @@
 # mcmcensemble 2.2
 
+## Major changes
+
+* it is now possible to use a named vector as first argument of the function
+passed in `f`. This is useful if you do something like:
+
+```
+p.log.named <- function(x) {
+  B <- 0.03
+  return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
+}
+```
+
 ## Other user-facing changes
 
 * there is now an additional argument check ensuring that `lower.inits` and 

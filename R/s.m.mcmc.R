@@ -36,6 +36,8 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
     ncol = n.dim,
     byrow = TRUE
   )
+  # This allows utilisation of named vectors in f()
+  colnames(ensemble.old) <- names(lower.inits)
 
   log.p.old <- future_apply(ensemble.old, 1, f, ..., future.seed = TRUE)
 
