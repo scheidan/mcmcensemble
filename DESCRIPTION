@@ -1,6 +1,6 @@
 Package: mcmcensemble
 Title: Ensemble Sampler for Affine-Invariant MCMC
-Version: 2.1
+Version: 2.1.9000
 Authors@R: 
     c(person(given = "Hugo",
              family = "Gruson",
