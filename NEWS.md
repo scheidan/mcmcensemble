@@ -1,8 +1,15 @@
+# mcmcensemble 2.2
+
+## Other user-facing changes
+
+* there is now an additional argument check ensuring that `lower.inits` and 
+`upper.inits` have the same names
+
 # mcmcensemble 2.1
 
 ## Major changes
 
-* the ensemble sampling can now be parallelized with the future framework. Check
+* the ensemble sampling can now be parallelised with the future framework. Check
 the [README](https://bisaloo.github.io/mcmcensemble/) for more information
 
 ## Other user-facing changes

@@ -74,12 +74,16 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
                          max.iter, n.walkers = 10 * length(lower.inits),
                          method = c("stretch", "differential.evolution"),
                          coda = FALSE, ...) {
-  if (length(lower.inits) != length(upper.inits)) {
-    stop("The length of 'lower.inits' and 'lower.inits' is must be identical!")
-  }
 
   n.dim <- length(lower.inits)
   init.range <- cbind(lower.inits, upper.inits)
+  if (length(lower.inits) != length(upper.inits) ||
+      isTRUE(names(lower.inits) != names(upper.inits))) {
+    stop(
+      "The length and names of 'lower.inits' and 'lower.inits' is must be
+      identical!", call. = FALSE
+    )
+  }
 
   ## run mcmc
   method <- match.arg(method)
