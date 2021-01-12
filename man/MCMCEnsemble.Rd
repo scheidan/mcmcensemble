@@ -40,20 +40,18 @@ object? (defaults to \code{FALSE})}
 \value{
 \itemize{
 \item if \code{coda = FALSE} a list with:
-}
 \itemize{
-\item \emph{samples}: A three dimensional array of samples with dimensions \code{walker} x
-\code{generation} x \code{parameter}
+\item \emph{samples}: A three dimensional array of samples with dimensions \code{walker}
+x \code{generation} x \code{parameter}
 \item \emph{log.p}: A matrix with the log density evaluate for each walker at each
 generation.
 }
-\itemize{
 \item if \code{coda = TRUE} a list with:
-}
 \itemize{
 \item \emph{samples}: A object of class \link[coda:mcmc.list]{coda::mcmc.list} containing all samples.
 \item \emph{log.p}: A matrix with the log density evaluate for each walker at each
 generation.
+}
 }
 }
 \description{

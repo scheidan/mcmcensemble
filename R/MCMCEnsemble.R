@@ -21,14 +21,14 @@
 #'
 #' @return
 #' * if `coda = FALSE` a list with:
-#' - *samples*: A three dimensional array of samples with dimensions `walker` x
-#' `generation` x `parameter`
-#' - *log.p*: A matrix with the log density evaluate for each walker at each
-#' generation.
+#'   - *samples*: A three dimensional array of samples with dimensions `walker`
+#'     x `generation` x `parameter`
+#'   - *log.p*: A matrix with the log density evaluate for each walker at each
+#'      generation.
 #' * if `coda = TRUE` a list with:
-#' - *samples*: A object of class [coda::mcmc.list] containing all samples.
-#' - *log.p*: A matrix with the log density evaluate for each walker at each
-#' generation.
+#'   - *samples*: A object of class [coda::mcmc.list] containing all samples.
+#'   - *log.p*: A matrix with the log density evaluate for each walker at each
+#'     generation.
 #'
 #' @examples
 #' ## a log-pdf to sample from
