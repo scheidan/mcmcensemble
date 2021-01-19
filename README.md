@@ -31,17 +31,18 @@ from Eric B. Ford (Penn State).
 
 ## Installation
 
-You can install the stable version of this package from CRAN:
+You can install the stable version of this package from
+[CRAN](https://cran.r-project.org/package=mcmcensemble):
 
 ``` r
 install.packages("mcmcensemble")
 ```
 
-or the development version from GitHub:
+or the development version from [GitHub](https://github.com/bisaloo),
+via my [r-universe](https://bisaloo.r-universe.dev/):
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("Bisaloo/mcmcensemble")
+install.packages('mcmcensemble', repos = 'https://bisaloo.r-universe.dev')
 ```
 
 ## Usage
@@ -157,10 +158,10 @@ at the start of your session.
 The methods used in this package also have (independent) implementations
 in other languages:
 
-  - emcee in Python (<https://doi.org/10.21105/joss.01864>)
-  - gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
+-   emcee in Python (<https://doi.org/10.21105/joss.01864>)
+-   gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
 
 ## Who is talking about this package?
 
-  - [R View from
-    October 2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
+-   [R View from October
+    2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
