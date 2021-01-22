@@ -175,21 +175,21 @@ in other languages:
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-terBraak2008" class="csl-entry">
-
-Braak, Cajo J. F. ter, and Jasper A. Vrugt. 2008. “Differential
-Evolution Markov Chain with Snooker Updater and Fewer Chains.”
-*Statistics and Computing* 18 (4): 435–46.
-<https://doi.org/10.1007/s11222-008-9104-9>.
-
-</div>
-
 <div id="ref-Goodman2010" class="csl-entry">
 
 Goodman, Jonathan, and Jonathan Weare. 2010. “Ensemble Samplers with
 Affine Invariance.” *Communications in Applied Mathematics and
 Computational Science* 5 (1): 65–80.
 <https://doi.org/10.2140/camcos.2010.5.65>.
+
+</div>
+
+<div id="ref-terBraak2008" class="csl-entry">
+
+ter Braak, Cajo J. F., and Jasper A. Vrugt. 2008. “Differential
+Evolution Markov Chain with Snooker Updater and Fewer Chains.”
+*Statistics and Computing* 18 (4): 435–46.
+<https://doi.org/10.1007/s11222-008-9104-9>.
 
 </div>
 
