@@ -1,5 +1,7 @@
 ---
 output: github_document
+bibliography: readme.bib
+link-citations: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -26,9 +28,7 @@ set.seed(18052020)
 This R package provides ensemble samplers for affine-invariant Monte Carlo
 Markov Chain, which allow a faster convergence for badly scaled estimation
 problems. Two samplers are proposed: the 'differential.evolution' sampler from
-[ter Braak and Vrugt (2008)](https://doi.org/10.1007/s11222-008-9104-9) and the
-'stretch' sampler from [Goodman and Weare
-(2010)](https://doi.org/10.2140/camcos.2010.5.65).
+@terBraak2008 and the 'stretch' sampler from @Goodman2010.
 
 For theoretical background about Ensemble MCMC (what are the benefits over
 simple MCMC? How do they work? What are the pitfalls?), please refer for example to 
@@ -107,13 +107,18 @@ future::plan("multiprocess")
 at the start of your session.
 
 ## Similar projects
+
+The Goodman-Weare 'stretch' sampler is also available in the [tonic R package](https://github.com/svdataman/tonic).
  
 The methods used in this package also have (independent) implementations in 
 other languages:
 
-- emcee in Python (<https://doi.org/10.21105/joss.01864>)
-- gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
+- [emcee v3: A Python ensemble sampling toolkit for affine-invariant MCMC](https://doi.org/10.21105/joss.01864)
+- [GWMCMC which implements the Goodman-Weare 'stretch' sampler in Matlab](https://github.com/grinsted/gwmcmc)
 
 ## Who is talking about this package?
 
 - [R View from October 2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
+
+## References
+

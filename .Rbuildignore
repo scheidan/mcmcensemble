@@ -6,3 +6,4 @@
 ^cran-comments\.md$
 ^pkgdown$
 ^CRAN-RELEASE$
+^readme.bib$

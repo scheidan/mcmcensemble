@@ -18,10 +18,10 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 This R package provides ensemble samplers for affine-invariant Monte
 Carlo Markov Chain, which allow a faster convergence for badly scaled
 estimation problems. Two samplers are proposed: the
-‘differential.evolution’ sampler from [ter Braak and Vrugt
-(2008)](https://doi.org/10.1007/s11222-008-9104-9) and the ‘stretch’
-sampler from [Goodman and Weare
-(2010)](https://doi.org/10.2140/camcos.2010.5.65).
+‘differential.evolution’ sampler from [ter Braak and
+Vrugt](#ref-terBraak2008) ([2008](#ref-terBraak2008)) and the ‘stretch’
+sampler from [Goodman and Weare](#ref-Goodman2010)
+([2010](#ref-Goodman2010)).
 
 For theoretical background about Ensemble MCMC (what are the benefits
 over simple MCMC? How do they work? What are the pitfalls?), please
@@ -155,13 +155,42 @@ at the start of your session.
 
 ## Similar projects
 
+The Goodman-Weare ‘stretch’ sampler is also available in the [tonic R
+package](https://github.com/svdataman/tonic).
+
 The methods used in this package also have (independent) implementations
 in other languages:
 
--   emcee in Python (<https://doi.org/10.21105/joss.01864>)
--   gwmcmc in Matlab (<https://github.com/grinsted/gwmcmc>)
+-   [emcee v3: A Python ensemble sampling toolkit for affine-invariant
+    MCMC](https://doi.org/10.21105/joss.01864)
+-   [GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in
+    Matlab](https://github.com/grinsted/gwmcmc)
 
 ## Who is talking about this package?
 
 -   [R View from October
     2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-terBraak2008" class="csl-entry">
+
+Braak, Cajo J. F. ter, and Jasper A. Vrugt. 2008. “Differential
+Evolution Markov Chain with Snooker Updater and Fewer Chains.”
+*Statistics and Computing* 18 (4): 435–46.
+<https://doi.org/10.1007/s11222-008-9104-9>.
+
+</div>
+
+<div id="ref-Goodman2010" class="csl-entry">
+
+Goodman, Jonathan, and Jonathan Weare. 2010. “Ensemble Samplers with
+Affine Invariance.” *Communications in Applied Mathematics and
+Computational Science* 5 (1): 65–80.
+<https://doi.org/10.2140/camcos.2010.5.65>.
+
+</div>
+
+</div>
