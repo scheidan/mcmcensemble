@@ -11,6 +11,8 @@ p.log.named <- function(x) {
   return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
 }
 ```
+* mcmcensemble now explicitly depends on R >= 3.5.0. This was already implicitly
+the case since 2.1 because of the dependency on the progressr package.
 
 ## Other user-facing changes
 
