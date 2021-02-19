@@ -30,7 +30,8 @@ initial distribution.}
 \item{n.walkers}{number of walkers (ensemble size)}
 
 \item{method}{method for proposal generation, either \code{"stretch"}, or
-\code{"differential.evolution"}.}
+\code{"differential.evolution"}. This argument will be saved as an attribute
+in the output (see examples).}
 
 \item{coda}{logical. Should the samples be returned as \link[coda:mcmc.list]{coda::mcmc.list}
 object? (defaults to \code{FALSE})}
@@ -53,6 +54,10 @@ generation.
 generation.
 }
 }
+
+In both cases, there is an additional attribute (accessible via
+\code{attr(res, "ensemble.sampler")}) recording which ensemble sampling algorithm
+was used.
 }
 \description{
 Ensemble Markov Chain Monte Carlo sampler with different strategies to
@@ -70,6 +75,9 @@ p.log <- function(x) {
 ## use stretch move
 res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=300, n.walkers=10, method="stretch")
+
+attr(res1, "ensemble.sampler")
+
 str(res1)
 
 
@@ -77,6 +85,8 @@ str(res1)
 res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=300, n.walkers=10, method="stretch",
                      coda=TRUE)
+
+attr(res2, "ensemble.sampler")
 
 summary(res2$samples)
 plot(res2$samples)
@@ -86,6 +96,8 @@ plot(res2$samples)
 res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=300, n.walkers=10,
                      method="differential.evolution", coda=TRUE)
+
+attr(res3, "ensemble.sampler")
 
 summary(res3$samples)
 plot(res3$samples)

@@ -14,8 +14,8 @@ test_that("mcmcensemble", {
 
   expect_identical(dim(res1$samples), c(10L, 300L, 2L))
   expect_identical(dim(res1$samples)[1:2], dim(res1$log.p))
-
   expect_identical(dimnames(res1$samples)[[3]], c("a", "b"))
+  expect_identical(attr(res1, "ensemble.sampler"), "stretch")
 
   res2 <- MCMCEnsemble(p.log, lower.inits=c(0, 0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="s")
@@ -26,6 +26,7 @@ test_that("mcmcensemble", {
                        max.iter=3000, n.walkers=10, method="d", coda=TRUE)
 
   expect_s3_class(res3$samples, "mcmc.list")
+  expect_identical(attr(res3, "ensemble.sampler"), "differential.evolution")
 
 })
 

@@ -66,6 +66,9 @@ p.log <- function(x) {
 ## use stretch move
 res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, method="stretch")
+
+attr(res1, "ensemble.sampler")
+
 str(res1)
 ```
 
@@ -79,6 +82,8 @@ informative and nicely formatted results and plots:
 res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, method="stretch", coda=TRUE)
 
+attr(res2, "ensemble.sampler")
+
 summary(res2$samples)
 plot(res2$samples)
 ```
@@ -88,6 +93,8 @@ plot(res2$samples)
 res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, 
                      method="differential.evolution", coda=TRUE)
+
+attr(res3, "ensemble.sampler")
 
 summary(res3$samples)
 plot(res3$samples)

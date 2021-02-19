@@ -13,6 +13,8 @@ p.log.named <- function(x) {
 ```
 * mcmcensemble now explicitly depends on R >= 3.5.0. This was already implicitly
 the case since 2.1 because of the dependency on the progressr package.
+* the ensemble sampling algorithm used by `MCMCEnsemble()` is now recorded in
+an additional attribute (accessible via `attr(res, "ensemble.sampler")`).
 
 ## Other user-facing changes
 

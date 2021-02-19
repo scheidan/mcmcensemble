@@ -61,6 +61,10 @@ p.log <- function(x) {
 res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, method="stretch")
 #> Using stretch move with 10 walkers.
+
+attr(res1, "ensemble.sampler")
+#> [1] "stretch"
+
 str(res1)
 #> List of 2
 #>  $ samples: num [1:10, 1:300, 1:2] 0.14 0.665 0.995 0.653 0.476 ...
@@ -72,6 +76,7 @@ str(res1)
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
+#>  - attr(*, "ensemble.sampler")= chr "stretch"
 ```
 
 If the [coda](https://cran.r-project.org/package=coda) package is
@@ -84,6 +89,9 @@ and `plot()` to get informative and nicely formatted results and plots:
 res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, method="stretch", coda=TRUE)
 #> Using stretch move with 10 walkers.
+
+attr(res2, "ensemble.sampler")
+#> [1] "stretch"
 
 summary(res2$samples)
 #> 
@@ -115,6 +123,9 @@ res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                      max.iter=3000, n.walkers=10, 
                      method="differential.evolution", coda=TRUE)
 #> Using differential.evolution move with 10 walkers.
+
+attr(res3, "ensemble.sampler")
+#> [1] "differential.evolution"
 
 summary(res3$samples)
 #> 

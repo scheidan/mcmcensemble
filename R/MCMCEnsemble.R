@@ -14,7 +14,8 @@
 #' @param max.iter maximum number of function evaluations
 #' @param n.walkers number of walkers (ensemble size)
 #' @param method method for proposal generation, either `"stretch"`, or
-#'   `"differential.evolution"`.
+#'   `"differential.evolution"`. This argument will be saved as an attribute
+#'   in the output (see examples).
 #' @param coda logical. Should the samples be returned as [coda::mcmc.list]
 #'   object? (defaults to `FALSE`)
 #' @param ... further arguments passed to `f`
@@ -30,6 +31,10 @@
 #'   - *log.p*: A matrix with the log density evaluate for each walker at each
 #'     generation.
 #'
+#' In both cases, there is an additional attribute (accessible via
+#' `attr(res, "ensemble.sampler")`) recording which ensemble sampling algorithm
+#' was used.
+#'
 #' @examples
 #' ## a log-pdf to sample from
 #' p.log <- function(x) {
@@ -40,6 +45,9 @@
 #' ## use stretch move
 #' res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
 #'                      max.iter=300, n.walkers=10, method="stretch")
+#'
+#' attr(res1, "ensemble.sampler")
+#'
 #' str(res1)
 #'
 #'
@@ -47,6 +55,8 @@
 #' res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
 #'                      max.iter=300, n.walkers=10, method="stretch",
 #'                      coda=TRUE)
+#'
+#' attr(res2, "ensemble.sampler")
 #'
 #' summary(res2$samples)
 #' plot(res2$samples)
@@ -56,6 +66,8 @@
 #' res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
 #'                      max.iter=300, n.walkers=10,
 #'                      method="differential.evolution", coda=TRUE)
+#'
+#' attr(res3, "ensemble.sampler")
 #'
 #' summary(res3$samples)
 #' plot(res3$samples)
@@ -126,6 +138,8 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
                  function(w) coda::as.mcmc(res$samples[w, , ]))
     res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
+
+  attr(res, "ensemble.sampler") <- method
 
   return(res)
 }
