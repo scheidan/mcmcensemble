@@ -127,5 +127,5 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
     res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
 
-  res
+  return(res)
 }
