@@ -3,7 +3,7 @@ p.log <- function(x) {
   return(-x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2)
 }
 
-test_that("mcmcensemble", {
+test_that("output sizes and names", {
 
   res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="s")
@@ -21,6 +21,12 @@ test_that("mcmcensemble", {
                        max.iter=3000, n.walkers=10, method="s")
 
   expect_identical(dimnames(res2$samples)[[3]], c("para_1", "para_2"))
+
+})
+
+test_that("coda", {
+
+  skip_if_not_installed("coda")
 
   res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
                        max.iter=3000, n.walkers=10, method="d", coda=TRUE)
