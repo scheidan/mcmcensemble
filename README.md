@@ -24,8 +24,7 @@ sampler from [Goodman and Weare](#ref-Goodman2010)
 
 For theoretical background about Ensemble MCMC (what are the benefits
 over simple MCMC? How do they work? What are the pitfalls?), please
-refer for example to [this
-lecture](https://astrostatistics.psu.edu/su14/lectures/HierarchicalBayesianModelingEnsembleMCMC.pdf)
+refer for example to [this lecture](https://doi.org/10.26207/46za-m573)
 from Eric B. Ford (Penn State).
 
 ## Installation
