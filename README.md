@@ -40,7 +40,7 @@ or the development version from [GitHub](https://github.com/bisaloo),
 via my [r-universe](https://bisaloo.r-universe.dev/):
 
 ``` r
-install.packages('mcmcensemble', repos = 'https://bisaloo.r-universe.dev')
+install.packages("mcmcensemble", repos = "https://bisaloo.r-universe.dev")
 ```
 
 ## Usage
@@ -50,14 +50,17 @@ library(mcmcensemble)
 
 ## a log-pdf to sample from
 p.log <- function(x) {
-    B <- 0.03                              # controls 'bananacity'
-    -x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
 }
 
 
 ## use stretch move
-res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, method="stretch")
+res1 <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, method = "stretch"
+)
 #> Using stretch move with 10 walkers.
 
 attr(res1, "ensemble.sampler")
@@ -84,8 +87,11 @@ and `plot()` to get informative and nicely formatted results and plots:
 
 ``` r
 ## use stretch move, return samples as 'coda' object
-res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, method="stretch", coda=TRUE)
+res2 <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
+)
 #> Using stretch move with 10 walkers.
 
 attr(res2, "ensemble.sampler")
@@ -117,9 +123,12 @@ plot(res2$samples)
 
 ``` r
 ## use different evolution move, return samples as 'coda' object
-res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=3000, n.walkers=10, 
-                     method="differential.evolution", coda=TRUE)
+res3 <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, 
+  method = "differential.evolution", coda = TRUE
+)
 #> Using differential.evolution move with 10 walkers.
 
 attr(res3, "ensemble.sampler")
