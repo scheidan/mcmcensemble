@@ -5,7 +5,7 @@
 * it is now possible to use a named vector as first argument of the function
 passed in `f`. This is useful if you do something like:
 
-```
+```r
 p.log.named <- function(x) {
   B <- 0.03
   return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
