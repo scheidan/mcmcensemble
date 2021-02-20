@@ -68,12 +68,12 @@ attr(res1, "ensemble.sampler")
 
 str(res1)
 #> List of 2
-#>  $ samples: num [1:10, 1:300, 1:2] 0.14 0.665 0.995 0.653 0.476 ...
+#>  $ samples: num [1:10, 1:300, 1:2] 0.42619 0.00133 0.35217 0.69689 0.25303 ...
 #>   ..- attr(*, "dimnames")=List of 3
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #>   .. ..$ : chr [1:2] "a" "b"
-#>  $ log.p  : num [1:10, 1:300] -3.59 -3.48 -2.41 -3.44 -2.44 ...
+#>  $ log.p  : num [1:10, 1:300] -3.23 -2.89 -2.34 -2.64 -2.76 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
@@ -107,15 +107,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>      Mean     SD Naive SE Time-series SE
-#> a  2.5369 10.520  0.19206         1.2490
-#> b -0.5984  4.575  0.08352         0.7117
+#>     Mean    SD Naive SE Time-series SE
+#> a 2.4952 8.857  0.16171         1.1310
+#> b 0.3038 3.541  0.06464         0.6403
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%    25%   50%   75%  97.5%
-#> a -17.10 -4.510 1.784 8.983 23.321
-#> b -13.12 -2.091 1.080 2.633  4.066
+#>     2.5%     25%   50%   75%  97.5%
+#> a -12.59 -3.9092 1.323 8.642 21.396
+#> b -11.32 -0.6229 1.257 2.518  4.296
 plot(res2$samples)
 ```
 
@@ -144,15 +144,15 @@ summary(res3$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>     Mean    SD Naive SE Time-series SE
-#> a 0.8694 8.912  0.16270         0.8364
-#> b 0.5526 3.038  0.05547         0.3271
+#>      Mean     SD Naive SE Time-series SE
+#> a -2.0589 10.004  0.18265         1.2377
+#> b -0.2129  4.591  0.08382         0.7078
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%     25%    50%   75%  97.5%
-#> a -16.052 -5.9044 0.4582 7.608 18.078
-#> b  -8.126 -0.8741 1.4248 2.607  4.136
+#>     2.5%    25%    50%   75%  97.5%
+#> a -25.31 -7.775 -2.191 5.152 15.203
+#> b -14.66 -1.436  1.239 2.699  4.141
 plot(res3$samples)
 ```
 

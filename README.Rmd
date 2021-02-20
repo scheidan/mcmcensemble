@@ -51,6 +51,10 @@ install.packages("mcmcensemble", repos = "https://bisaloo.r-universe.dev")
 
 ## Usage
 
+```{r, include = FALSE}
+set.seed(20210220)
+```
+
 ```{r}
 library(mcmcensemble)
 
