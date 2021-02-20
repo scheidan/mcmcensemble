@@ -1,4 +1,4 @@
-# mcmcensemble 2.2
+# mcmcensemble 2.2.0
 
 ## Major changes
 
