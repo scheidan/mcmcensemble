@@ -158,6 +158,25 @@ plot(res3$samples)
 
 <img src="man/figures/README-example-de-1.svg" width="100%" />
 
+## Progress bar
+
+You can choose to enable a progress bar thanks to the
+[progressr](https://cran.r-project.org/package=progressr) package. This
+can be done by adding the following line to your script before running
+`MCMCEnsemble()`:
+
+``` r
+progressr::handlers(global = TRUE) # requires R >= 4.0
+progressr::handlers("progress")
+
+MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, 
+  method = "differential.evolution", coda = TRUE
+)
+```
+
 ## Parallel processing
 
 This package is set up to allow transparent parallel processing when
