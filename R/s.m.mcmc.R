@@ -53,7 +53,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   p()
 
-  for (l in seq_along(chain.length)[-1]) {
+  for (l in seq_len(chain.length)[-1]) {
 
     z <- ((runif(n.walkers) + 1)^2) / 2
 
