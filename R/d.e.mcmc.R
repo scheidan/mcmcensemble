@@ -54,9 +54,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   p()
 
-  ## the loop
-
-  for (l in 2:chain.length) {
+  for (l in seq_along(chain.length)[-1]) {
 
     z <- 2.38 / sqrt(2 * n.dim)
     if (l %% 10 == 0) {

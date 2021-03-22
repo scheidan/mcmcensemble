@@ -1,5 +1,10 @@
 # mcmcensemble (development version)
 
+## Bug fixes
+
+* The chains now run fine even in the case where there is only one iteration 
+(i.e., `max.iter %/% n.walkers == 1`)
+
 # mcmcensemble 2.2.0
 
 ## Major changes
