@@ -129,7 +129,7 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
     if (!requireNamespace("coda", quietly = TRUE)) {
       stop(
         "Package 'coda' needed for to create coda objects. ",
-        "Please install it or use `coda = TRUE`.",
+        "Please install it or use `coda = FALSE`.",
         call. = FALSE
       )
     }

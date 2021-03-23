@@ -4,6 +4,9 @@
 
 * The chains now run fine even in the case where there is only one iteration 
 (i.e., `max.iter %/% n.walkers == 1`)
+* The error message when the coda package is absent and `coda = TRUE` now 
+correctly prompt the user to use `coda = FALSE` if they do not wish to install 
+coda.
 
 # mcmcensemble 2.2.0
 
