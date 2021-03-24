@@ -1,4 +1,12 @@
-# mcmcensemble (development version)
+# mcmcensemble 3.0.0 development version)
+
+## Major changes
+
+* the arguments `lower.inits` and `upper.inits` are deprecated in favour of
+`inits` which leave more flexibility to the user. Please read the detailed
+blog post for more background about this change and how to migrate.
+
+* `inits` can now be a `data.frame` or a `matrix`
 
 * there is a new vignette (`vignette("diagnostic-pkgs", package = "mcmcensemble")`) presenting two different options (coda and bayesplot) to plot and evaluate the MCMC chains produced by mcmcensemble
 

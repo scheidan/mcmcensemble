@@ -7,8 +7,8 @@
 #'
 #' @author Sanda Dejanic
 #'
-#' @return List containing:
-#' - `samples[n.walkers,chain.length,n.dim]`
+#' @return Named list containing:
+#' - `samples[n.walkers,chain.length,n.params]`
 #' - `log.p[n.walkers,chain.length]`
 #'
 #' @importFrom stats runif
@@ -22,23 +22,15 @@
 #'
 #' @importFrom future.apply future_apply
 #'
-d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
+d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
 
-  n.dim <- length(lower.inits)
-  ## initial values
+  n.params <- ncol(inits)
 
   chain.length <- max.iter %/% n.walkers
 
   p <- progressor(chain.length)
 
-  ensemble.old <- matrix(
-    runif(n.dim*n.walkers, lower.inits, upper.inits),
-    nrow = n.walkers,
-    ncol = n.dim,
-    byrow = TRUE
-  )
-  # This allows utilisation of named vectors in f()
-  colnames(ensemble.old) <- names(lower.inits)
+  ensemble.old <- inits
 
   log.p.old <- future_apply(ensemble.old, 1, f, ..., future.seed = TRUE)
 
@@ -47,7 +39,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   }
 
   log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
-  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
+  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.params))
 
   log.p[, 1] <- log.p.old
   samples[, 1, ] <- ensemble.old
@@ -56,7 +48,7 @@ d.e.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
   for (l in seq_len(chain.length)[-1]) {
 
-    z <- 2.38 / sqrt(2 * n.dim)
+    z <- 2.38 / sqrt(2 * n.params)
     if (l %% 10 == 0) {
       z <- 1
     }

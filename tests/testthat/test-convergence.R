@@ -8,12 +8,17 @@ p.log <- function(x) {
   dmvnorm(x, target, sigma = diag(2), log = TRUE)
 }
 
+unif_inits <- data.frame(
+  a = runif(20),
+  b = runif(20)
+)
+
 test_that("convergence stretch", {
 
   mcmcres <- MCMCEnsemble(
     p.log,
-    lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-    max.iter=1e5, n.walkers=10,
+    inits=unif_inits,
+    max.iter=1e5, n.walkers=20,
     method="stretch",
     coda=TRUE
   )
@@ -35,8 +40,8 @@ test_that("convergence differencial evolution", {
 
   mcmcres <- MCMCEnsemble(
     p.log,
-    lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-    max.iter=1e5, n.walkers=10,
+    inits=unif_inits,
+    max.iter=1e5, n.walkers=20,
     method="d",
     coda=TRUE
   )

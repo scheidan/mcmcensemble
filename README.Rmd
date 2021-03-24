@@ -64,13 +64,17 @@ p.log <- function(x) {
   -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
 }
 
+## set options and starting point
+n_walkers <- 10
+unif_inits <- data.frame(
+  "a" = runif(n_walkers, 0, 1),
+  "b" = runif(n_walkers, 0, 1)
+)
 
 ## use stretch move
-res1 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, method = "stretch"
-)
+res1 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch")
 
 attr(res1, "ensemble.sampler")
 
@@ -84,11 +88,9 @@ informative and nicely formatted results and plots:
 
 ```{r example-stretch, dev = 'svglite'}
 ## use stretch move, return samples as 'coda' object
-res2 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
-)
+res2 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch", coda = TRUE)
 
 attr(res2, "ensemble.sampler")
 
@@ -98,12 +100,9 @@ plot(res2$samples)
 
 ```{r example-de, dev = 'svglite'}
 ## use different evolution move, return samples as 'coda' object
-res3 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, 
-  method = "differential.evolution", coda = TRUE
-)
+res3 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "differential.evolution", coda = TRUE)
 
 attr(res3, "ensemble.sampler")
 
@@ -122,12 +121,9 @@ done by adding the following line to your script before running
 progressr::handlers(global = TRUE) # requires R >= 4.0
 progressr::handlers("progress")
 
-MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, 
-  method = "differential.evolution", coda = TRUE
-)
+CMCEnsemble(p.log, inits = unif_inits,
+            max.iter = 5000, n.walkers = n_walkers,
+            method = "differential.evolution", coda = TRUE)
 ```
 
 

@@ -54,13 +54,17 @@ p.log <- function(x) {
   -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
 }
 
+## set options and starting point
+n_walkers <- 10
+unif_inits <- data.frame(
+  "a" = runif(n_walkers, 0, 1),
+  "b" = runif(n_walkers, 0, 1)
+)
 
 ## use stretch move
-res1 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, method = "stretch"
-)
+res1 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch")
 #> Using stretch move with 10 walkers.
 
 attr(res1, "ensemble.sampler")
@@ -68,15 +72,15 @@ attr(res1, "ensemble.sampler")
 
 str(res1)
 #> List of 2
-#>  $ samples: num [1:10, 1:300, 1:2] 0.42619 0.00133 0.35217 0.69689 0.25303 ...
+#>  $ samples: num [1:10, 1:500, 1:2] 0.42619 0.45413 0.00133 0.59391 0.35217 ...
 #>   ..- attr(*, "dimnames")=List of 3
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
-#>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
-#>   .. ..$ : chr [1:2] "a" "b"
-#>  $ log.p  : num [1:10, 1:300] -3.23 -2.89 -2.34 -2.64 -2.76 ...
+#>   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...
+#>   .. ..$ : chr [1:2] "para_1" "para_2"
+#>  $ log.p  : num [1:10, 1:500] -2.8 -3.91 -2.68 -2.93 -2.25 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
-#>   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...
+#>   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #>  - attr(*, "ensemble.sampler")= chr "stretch"
 ```
 
@@ -87,11 +91,9 @@ and `plot()` to get informative and nicely formatted results and plots:
 
 ``` r
 ## use stretch move, return samples as 'coda' object
-res2 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
-)
+res2 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch", coda = TRUE)
 #> Using stretch move with 10 walkers.
 
 attr(res2, "ensemble.sampler")
@@ -99,23 +101,23 @@ attr(res2, "ensemble.sampler")
 
 summary(res2$samples)
 #> 
-#> Iterations = 1:300
+#> Iterations = 1:500
 #> Thinning interval = 1 
 #> Number of chains = 10 
-#> Sample size per chain = 300 
+#> Sample size per chain = 500 
 #> 
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>     Mean    SD Naive SE Time-series SE
-#> a 2.4952 8.857  0.16171         1.1310
-#> b 0.3038 3.541  0.06464         0.6403
+#>           Mean    SD Naive SE Time-series SE
+#> para_1 -1.9746 8.892  0.12575         1.1049
+#> para_2  0.3599 3.229  0.04566         0.4147
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%     25%   50%   75%  97.5%
-#> a -12.59 -3.9092 1.323 8.642 21.396
-#> b -11.32 -0.6229 1.257 2.518  4.296
+#>           2.5%     25%    50%   75%  97.5%
+#> para_1 -19.563 -8.1257 -1.429 4.862 13.448
+#> para_2  -8.809 -0.7837  1.199 2.519  4.225
 plot(res2$samples)
 ```
 
@@ -123,12 +125,9 @@ plot(res2$samples)
 
 ``` r
 ## use different evolution move, return samples as 'coda' object
-res3 <- MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, 
-  method = "differential.evolution", coda = TRUE
-)
+res3 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "differential.evolution", coda = TRUE)
 #> Using differential.evolution move with 10 walkers.
 
 attr(res3, "ensemble.sampler")
@@ -136,23 +135,23 @@ attr(res3, "ensemble.sampler")
 
 summary(res3$samples)
 #> 
-#> Iterations = 1:300
+#> Iterations = 1:500
 #> Thinning interval = 1 
 #> Number of chains = 10 
-#> Sample size per chain = 300 
+#> Sample size per chain = 500 
 #> 
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>      Mean     SD Naive SE Time-series SE
-#> a -2.0589 10.004  0.18265         1.2377
-#> b -0.2129  4.591  0.08382         0.7078
+#>           Mean    SD Naive SE Time-series SE
+#> para_1 -0.7293 9.675  0.13683         0.9148
+#> para_2  0.1894 4.103  0.05802         0.4690
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%    25%    50%   75%  97.5%
-#> a -25.31 -7.775 -2.191 5.152 15.203
-#> b -14.66 -1.436  1.239 2.699  4.141
+#>          2.5%     25%     50%   75% 97.5%
+#> para_1 -23.87 -6.4298 -0.2157 6.038 16.33
+#> para_2 -13.53 -0.8687  1.6170 2.583  4.22
 plot(res3$samples)
 ```
 
@@ -169,12 +168,9 @@ can be done by adding the following line to your script before running
 progressr::handlers(global = TRUE) # requires R >= 4.0
 progressr::handlers("progress")
 
-MCMCEnsemble(
-  p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
-  max.iter = 3000, n.walkers = 10, 
-  method = "differential.evolution", coda = TRUE
-)
+CMCEnsemble(p.log, inits = unif_inits,
+            max.iter = 5000, n.walkers = n_walkers,
+            method = "differential.evolution", coda = TRUE)
 ```
 
 ## Parallel processing
