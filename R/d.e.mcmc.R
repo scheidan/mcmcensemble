@@ -13,7 +13,7 @@
 #'
 #' @importFrom stats runif
 #'
-#' @export
+#' @noRd
 #'
 #' @references
 #' ter Braak, C. J. F. and Vrugt, J. A. (2008) Differential Evolution Markov

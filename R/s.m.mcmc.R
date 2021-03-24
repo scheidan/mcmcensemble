@@ -11,7 +11,7 @@
 #'
 #' @importFrom stats runif
 #'
-#' @export
+#' @noRd
 #'
 #' @references
 #' Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
