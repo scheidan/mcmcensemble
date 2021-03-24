@@ -1,4 +1,4 @@
-# mcmcensemble 3.0.0 development version)
+# mcmcensemble 3.0.0 (development version)
 
 ## Major changes
 
