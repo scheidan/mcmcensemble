@@ -6,10 +6,9 @@
 \usage{
 MCMCEnsemble(
   f,
-  lower.inits,
-  upper.inits,
+  inits,
   max.iter,
-  n.walkers = 10 * length(lower.inits),
+  n.walkers = 10 * ncol(inits),
   method = c("stretch", "differential.evolution"),
   coda = FALSE,
   ...
@@ -19,11 +18,8 @@ MCMCEnsemble(
 \item{f}{function that returns a single scalar value proportional to the log
 probability density to sample from.}
 
-\item{lower.inits}{vector specifying for each parameter the lower value the
-initial distribution.}
-
-\item{upper.inits}{vector specifying for each parameter the upper value the
-initial distribution.}
+\item{inits}{A matrix (or data.frame) containing the starting values for the
+walkers. Each column is a variable to estimate and each row is a walker}
 
 \item{max.iter}{maximum number of function evaluations}
 
@@ -72,9 +68,18 @@ p.log <- function(x) {
     -x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2
 }
 
+## set options and starting point
+n_walkers <- 10
+unif_inits <- data.frame(
+  "a" = runif(n_walkers, 0, 1),
+  "b" = runif(n_walkers, 0, 1)
+)
+
+
 ## use stretch move
-res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=300, n.walkers=10, method="stretch")
+res1 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 300, n.walkers = n_walkers,
+                     method = "stretch")
 
 attr(res1, "ensemble.sampler")
 
@@ -82,9 +87,9 @@ str(res1)
 
 
 ## use stretch move, return samples as 'coda' object
-res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=300, n.walkers=10, method="stretch",
-                     coda=TRUE)
+res2 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 300, n.walkers = n_walkers,
+                     method = "stretch", coda = TRUE)
 
 attr(res2, "ensemble.sampler")
 
@@ -93,9 +98,9 @@ plot(res2$samples)
 
 
 ## use different evolution move, return samples as 'coda' object
-res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-                     max.iter=300, n.walkers=10,
-                     method="differential.evolution", coda=TRUE)
+res3 <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 300, n.walkers = n_walkers,
+                     method = "differential.evolution", coda = TRUE)
 
 attr(res3, "ensemble.sampler")
 
