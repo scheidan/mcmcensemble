@@ -1,0 +1,148 @@
+---
+title: "mcmcensemble 3.0.0: new way of specifying inits values"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In previous mcmcensemble versions, the starting values of the various were
+drawn from an uniform distribution whose bounds were determined by the values
+of `lower.inits` and `upper.inits`.
+
+In this new version, the user is in charge of providing a matrix (or a
+data.frame) containing all the starting values for all the parameters for all 
+the chains. If this increases somewhat the complexity of the package and the 
+workload of the user, it has huge benefits that we will present now.
+
+```{r}
+library(mcmcensemble)
+packageVersion("mcmcensemble")
+```
+
+## Sample from a non-uniform distribution
+
+The main drawback from the previous behaviour is that it was not possible to 
+sample the initial values from something else than a uniform distribution. You
+can now do this. If we take the 'banana' example from the `README` and want to
+start with values samples from a normal distribution centered on 0 with a 
+standard deviation of 2, we do:
+
+```{r}
+## a log-pdf to sample from
+p.log <- function(x) {
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
+}
+
+## set options and starting point
+n_walkers <- 10
+unif_inits <- data.frame(
+  "a" = rnorm(n_walkers, mean = 0, sd = 2),
+  "b" = rnorm(n_walkers, mean = 0, sd = 1)
+)
+
+res <- MCMCEnsemble(p.log, inits = unif_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch", coda = TRUE)
+
+summary(res$samples)
+plot(res$samples)
+```
+It is also a good opportunity to set quasi-random starting values that maximimes
+to exploration of the available space. One example of a such quasi-random
+distribution is the [Owen-scrambled Sobol sequence](https://www.spacefillr.com/reference/generate_sobol_owen_set.html)
+available in the [spacefillr](https://www.spacefillr.com/) package.
+
+```{r}
+n_walkers <- 10
+sobol_inits <- setNames(
+  spacefillr::generate_sobol_owen_set(n_walkers, dim = 2),
+  c("a", "b")
+)
+res <- MCMCEnsemble(p.log, inits = sobol_inits,
+                     max.iter = 5000, n.walkers = n_walkers,
+                     method = "stretch", coda = TRUE)
+
+summary(res$samples)
+plot(res$samples)
+```
+
+## Re-start a chain from where it ended
+
+Another new possibility thanks to this new behaviour in mcmcensemble 3.0.0 is
+the option to restart a chain from where it ended. Let's use again the
+'banana' example from the `README` but let's cut it short:
+
+```{r}
+## a log-pdf to sample from
+p.log <- function(x) {
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
+}
+
+## set options and starting point
+n_walkers <- 10
+unif_inits <- data.frame(
+  "a" = runif(n_walkers, 0, 1),
+  "b" = runif(n_walkers, 0, 1)
+)
+
+## use stretch move
+short <- MCMCEnsemble(p.log, inits = unif_inits,
+                      max.iter = 50, n.walkers = n_walkers,
+                      method = "stretch", coda = TRUE)
+
+summary(short$samples)
+plot(short$samples)
+```
+
+You may notice that this example has a very low number of iteration. We may want
+to let it run a little bit more. We can restart the chain from where it ended 
+with:
+
+```{r}
+last_values <- do.call(rbind, lapply(short$samples, function(c) c[nrow(c), ]))
+
+longer <- MCMCEnsemble(p.log, inits = last_values,
+                       max.iter = 4950, n.walkers = n_walkers,
+                       method = "stretch", coda = TRUE)
+
+# `final` is the concatenation of `short` and `longer`
+# However, we need to remove the first element of `longer` since it's already
+# present in `short`
+final <- list(
+  samples = coda::as.mcmc.list(lapply(seq_along(longer$samples), function(i) {
+    coda::as.mcmc(rbind(short$samples[[i]], longer$samples[[i]][-1, ]))
+  })),
+  log.p = cbind(short$log.p, longer$log.p[, -1])
+)
+
+plot(final$samples)
+```
+For non-coda outputs, here is the equivalent coda snippet:
+
+```{r}
+short <- MCMCEnsemble(p.log, inits = unif_inits,
+                      max.iter = 50, n.walkers = n_walkers,
+                      method = "stretch")
+
+last_values <- short$samples[, dim(short$samples)[2], ]
+
+longer <- MCMCEnsemble(p.log, inits = last_values,
+                       max.iter = 4950, n.walkers = n_walkers,
+                       method = "stretch")
+
+# `final` is the concatenation of `short` and `longer`
+# However, we need to remove the first element of `longer` since it's already
+# present in `short`
+final <- list(
+  samples = array(unlist(lapply(seq_len(dim(longer$samples)[3]), function(i) {
+    cbind(longer$samples[,, i], short$samples[,, i])
+  })), dim = dim(short$samples) + c(0, dim(longer$samples)[2], 0)),
+  log.p = cbind(short$log.p, longer$log.p[, -1])
+)
+```
+
+## Migrating from mcmcensemble 2.X to mcmcensemble 3.X

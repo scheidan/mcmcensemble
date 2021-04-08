@@ -7,3 +7,8 @@ template:
 authors:
   Hugo Gruson:
     href: https://www.normalesup.org/~hgruson/
+
+news:
+  releases:
+    - text: 'Version 3.0.0'
+      href: articles/blog_v3.html
