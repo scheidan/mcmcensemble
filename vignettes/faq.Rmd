@@ -20,7 +20,12 @@ library(mcmcensemble)
 
 ## Can estimations go beyond `lower.inits` and `upper.inits`?
 
-**YES**
+Yes, the `lower.inits` and `upper.inits` control the range of the *initial* 
+values, but the chain is still allowed to move freely after this initial step,
+as shown in the following example. 
+
+Please report to the next question to learn how you can specify hard limits for
+the chains.
 
 ```{r, eval = require("coda")}
 ## a log-pdf to sample from
@@ -64,9 +69,11 @@ plot(res2$samples)
 
 ## How to restrict the possible parameter range?
 
-There is no built-in way to define hard limits for the parameter and make sure they never go outside of this range.
+There is no built-in way to define hard limits for the parameter and make sure 
+they never go outside of this range.
 
-The recommended way to address this issue is to handle these cases in the function `f` you provide.
+The recommended way to address this issue is to handle these cases in the 
+function `f` you provide.
 
 For example, to keep parameters in the 0-1 range:
 
@@ -95,3 +102,33 @@ summary(res$samples)
 plot(res$samples)
 ```
 
+This might seem inconvenient but in most cases, users will define their posterior probability as the product of a prior probability
+and the likelihood. In this situation, values that are not contained in the log-prior density automatically return `-Inf` in the log-posterior and it is not necessary to define it explicitly:
+
+```{r}
+prior.log <- function(x) {
+ dunif(x, log = TRUE)
+}
+
+lkl.log <- function(x) {
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1 / 2 * (x[2] + B * x[1]^2 - 100 * B)^2
+}
+
+posterior.log <- function(x) {
+  sum(prior.log(x)) + lkl.log(x)
+}
+
+res <- MCMCEnsemble(
+  posterior.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 5000, n.walkers = 10,
+  method = "stretch",
+  coda = TRUE
+)
+summary(res$samples)
+```
+
+```{r, eval = identical(Sys.getenv("IN_PKGDOWN"), "true")}
+plot(res$samples)
+```
