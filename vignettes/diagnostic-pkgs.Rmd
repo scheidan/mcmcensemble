@@ -1,0 +1,110 @@
+---
+title: "Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To keep mcmcensemble as lean as possible, all diagnostics and plotting facilities are outsourced to other packages. It makes more sense to rely on these generic packages as the tools they provide can be used by many other MCMC packages.
+
+To our knowledge, there are two such packages that are readily compatible with mcmcensemble (but please [open an issue in the GitHub repository](https://github.com/Bisaloo/mcmcensemble/issues/new/choose) if you find others):
+
+- [coda](https://cran.r-project.org/package=coda), a widespread package defining a common format for MCMC object and various utilities
+- [bayesplot](https://mc-stan.org/bayesplot/), a more recent package developed by the [Stan team](https://mc-stan.org/) a which offers a larger variety of plotting options based on [ggplot2](https://ggplot2.tidyverse.org/)
+
+```{r setup}
+library(mcmcensemble)
+
+## a log-pdf to sample from
+p.log <- function(x) {
+  B <- 0.03 # controls 'bananacity'
+  -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
+}
+```
+
+## coda
+
+```{r}
+library(coda)
+```
+
+*Usage of the coda package to diagnostic and plot your mcmc chains require the use of the `coda = TRUE` option in your `MCMCEnsemble()` call:*
+
+```{r}
+## use stretch move, return samples as 'coda' object
+res <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
+)
+```
+
+The estimations are stored in the `samples` element of the result. This element
+is of class `mcmc.list`:
+
+```{r}
+class(res$samples)
+```
+
+As such, it can use specific method from the coda package, such as `summary()` or `plot()`
+
+```{r}
+summary(res$samples)
+plot(res$samples)
+```
+
+You can also use any other function from the coda package, such as `effectiveSize()`:
+
+```{r}
+effectiveSize(res$samples)
+```
+
+Please report to coda documentation to see the complete list of available functions.
+
+## bayesplot
+
+```{r}
+library(bayesplot)
+```
+
+As opposed to the previous example, bayesplot is readily compatible with all outputs from `MCMCEnsemble()`, no matter the value you specified for the `coda` argument:
+
+```{r}
+res_nocoda <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, method = "stretch", coda = FALSE
+)
+
+res_coda <- MCMCEnsemble(
+  p.log,
+  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
+)
+```
+
+We can use the various plotting facilities:
+
+```{r, out.width='45%'}
+# Density of log-posterior of each parameter
+mcmc_areas(res_nocoda$samples)
+mcmc_areas(res_coda$samples)
+
+# All the sample points in the parameter space
+mcmc_scatter(res_nocoda$samples)
+mcmc_scatter(res_coda$samples)
+```
+However, a limited number of functions still only work with `coda = TRUE`. It is for example the case of `mcmc_trace()`:
+
+```{r}
+mcmc_trace(res_coda$samples)
+```
