@@ -1,5 +1,7 @@
 # mcmcensemble (development version)
 
+* there is a new vignette (`vignette("diagnostic-pkgs", package = "mcmcensemble")`) presenting two different options (coda and bayesplot) to plot and evaluate the MCMC chains produced by mcmcensemble
+
 ## Bug fixes
 
 * The chains now run fine even in the case where there is only one iteration 

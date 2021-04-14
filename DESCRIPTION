@@ -30,6 +30,7 @@ Imports:
     future.apply,
     progressr
 Suggests: 
+    bayesplot,
     coda,
     mockery,
     testthat (>= 3.0.0),
