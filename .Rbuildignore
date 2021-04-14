@@ -7,4 +7,5 @@
 ^pkgdown$
 ^CRAN-RELEASE$
 ^readme.bib$
-vignettes/blog_*.Rmd
+^vignettes/blog_.*\.Rmd
+
