@@ -59,6 +59,9 @@ As such, it can use specific method from the coda package, such as `summary()` o
 
 ```{r}
 summary(res$samples)
+```
+
+```{r, eval = identical(Sys.getenv("IN_PKGDOWN"), "true")}
 plot(res$samples)
 ```
 
