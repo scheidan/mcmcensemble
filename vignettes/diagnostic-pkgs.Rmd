@@ -97,7 +97,7 @@ res_coda <- MCMCEnsemble(
 
 We can use the various plotting facilities:
 
-```{r, out.width='45%'}
+```{r, out.width='45%', fig.show='hold'}
 # Density of log-posterior of each parameter
 mcmc_areas(res_nocoda$samples)
 mcmc_areas(res_coda$samples)
@@ -106,6 +106,7 @@ mcmc_areas(res_coda$samples)
 mcmc_scatter(res_nocoda$samples)
 mcmc_scatter(res_coda$samples)
 ```
+
 However, a limited number of functions still only work with `coda = TRUE`. It is for example the case of `mcmc_trace()`:
 
 ```{r}
