@@ -131,7 +131,7 @@ posterior.log <- function(x) {
 
 res <- MCMCEnsemble(
   posterior.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  inits = unif_inits,
   max.iter = 5000, n.walkers = 10,
   method = "stretch",
   coda = TRUE
