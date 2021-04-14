@@ -50,7 +50,8 @@ res <- MCMCEnsemble(p.log, inits = unif_inits,
 summary(res$samples)
 plot(res$samples)
 ```
-It is also a good opportunity to set quasi-random starting values that maximimes
+
+It is also a good opportunity to set quasi-random starting values that maximises
 to exploration of the available space. One example of a such quasi-random
 distribution is the [Owen-scrambled Sobol sequence](https://www.spacefillr.com/reference/generate_sobol_owen_set.html)
 available in the [spacefillr](https://www.spacefillr.com/) package.
@@ -121,6 +122,7 @@ final <- list(
 
 plot(final$samples)
 ```
+
 For non-coda outputs, here is the equivalent coda snippet:
 
 ```{r}
@@ -146,3 +148,43 @@ final <- list(
 ```
 
 ## Migrating from mcmcensemble 2.X to mcmcensemble 3.X
+
+As mentioned in the introduction of this blog post, the prior distribution in
+previous versions of mcmcensemble was always a uniform distribution between 
+`lower.inits` and `upper.inits`. It means that your previous code snippets:
+
+```{r v2-chunk, eval = FALSE, include = FALSE}
+## set options and starting point
+n_walkers <- 10
+
+## use stretch move
+short <- MCMCEnsemble(
+  p.log, 
+  lower.inits = c(-5, -15), upper.inits = c(5, 15),
+  max.iter = 50, n.walkers = n_walkers,
+  method = "stretch", coda = TRUE
+)
+```
+
+```{r, echo = FALSE}
+flair::flair_lines(flair::decorate_chunk("v2-chunk", eval = FALSE), 7)
+```
+
+must be updated to:
+
+```{r v3-chunk, eval = FALSE, include = FALSE}
+## set options and starting point
+n_walkers <- 10
+
+## use stretch move
+short <- MCMCEnsemble(
+  p.log, 
+  inits = runif(n_walkers, min = c(-5, -15), max = c(5, 15)),
+  max.iter = 50, n.walkers = n_walkers,
+  method = "stretch", coda = TRUE
+)
+```
+
+```{r, echo = FALSE}
+flair::flair_lines(flair::decorate_chunk("v3-chunk", eval = FALSE), 7)
+```
