@@ -103,6 +103,9 @@ We can use the various plotting facilities:
 mcmc_areas(res_nocoda$samples)
 mcmc_areas(res_coda$samples)
 
+mcmc_dens(res_nocoda$samples)
+mcmc_dens(res_coda$samples)
+
 # All the sample points in the parameter space
 mcmc_scatter(res_nocoda$samples)
 mcmc_scatter(res_coda$samples)
