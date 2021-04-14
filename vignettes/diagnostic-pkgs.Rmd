@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+set.seed(20210414)
 ```
 
 To keep mcmcensemble as lean as possible, all diagnostics and plotting facilities are outsourced to other packages. It makes more sense to rely on these generic packages as the tools they provide can be used by many other MCMC packages.
