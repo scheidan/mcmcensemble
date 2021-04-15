@@ -30,6 +30,11 @@ p.log <- function(x) {
   B <- 0.03 # controls 'bananacity'
   -x[1]^2 / 200 - 1/2 * (x[2] + B * x[1]^2 - 100 * B)^2
 }
+
+unif_inits <- data.frame(
+  a = runif(10, min = 0, max = 1),
+  b = runif(10, min = 0, max = 1)
+)
 ```
 
 ## coda
@@ -44,7 +49,7 @@ library(coda)
 ## use stretch move, return samples as 'coda' object
 res <- MCMCEnsemble(
   p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  inits = unif_inits,
   max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
 )
 ```
@@ -85,13 +90,13 @@ As opposed to the previous example, bayesplot is readily compatible with all out
 ```{r}
 res_nocoda <- MCMCEnsemble(
   p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  inits = unif_inits,
   max.iter = 3000, n.walkers = 10, method = "stretch", coda = FALSE
 )
 
 res_coda <- MCMCEnsemble(
   p.log,
-  lower.inits = c(a = 0, b = 0), upper.inits = c(a = 1, b = 1),
+  inits = unif_inits,
   max.iter = 3000, n.walkers = 10, method = "stretch", coda = TRUE
 )
 ```
@@ -115,4 +120,11 @@ However, a limited number of functions still only work with `coda = TRUE`. It is
 
 ```{r}
 mcmc_trace(res_coda$samples)
+```
+
+Because bayesplot relies on ggplot and its layer system, you can add extra layers as necessary. For example, a common request is how to display the prior and posterior density on the same plot. If your prior is wrapped in a R function, you can then use the `overlay_function()` for this. In our case, we used a uniform distribution as our prior:
+
+```{r}
+mcmc_dens(res_coda$samples) + 
+  overlay_function(fun = "dunif", geom = "density", color = "red", fill = "darkred", alpha = 0.5)
 ```

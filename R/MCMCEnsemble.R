@@ -7,10 +7,8 @@
 #'
 #' @param f function that returns a single scalar value proportional to the log
 #'   probability density to sample from.
-#' @param lower.inits vector specifying for each parameter the lower value the
-#'   initial distribution.
-#' @param upper.inits vector specifying for each parameter the upper value the
-#'   initial distribution.
+#' @param inits A matrix (or data.frame) containing the starting values for the
+#'   walkers. Each column is a variable to estimate and each row is a walker
 #' @param max.iter maximum number of function evaluations
 #' @param n.walkers number of walkers (ensemble size)
 #' @param method method for proposal generation, either `"stretch"`, or
@@ -42,9 +40,18 @@
 #'     -x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2
 #' }
 #'
+#' ## set options and starting point
+#' n_walkers <- 10
+#' unif_inits <- data.frame(
+#'   "a" = runif(n_walkers, 0, 1),
+#'   "b" = runif(n_walkers, 0, 1)
+#' )
+#'
+#'
 #' ## use stretch move
-#' res1 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-#'                      max.iter=300, n.walkers=10, method="stretch")
+#' res1 <- MCMCEnsemble(p.log, inits = unif_inits,
+#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      method = "stretch")
 #'
 #' attr(res1, "ensemble.sampler")
 #'
@@ -52,9 +59,9 @@
 #'
 #'
 #' ## use stretch move, return samples as 'coda' object
-#' res2 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-#'                      max.iter=300, n.walkers=10, method="stretch",
-#'                      coda=TRUE)
+#' res2 <- MCMCEnsemble(p.log, inits = unif_inits,
+#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      method = "stretch", coda = TRUE)
 #'
 #' attr(res2, "ensemble.sampler")
 #'
@@ -63,9 +70,9 @@
 #'
 #'
 #' ## use different evolution move, return samples as 'coda' object
-#' res3 <- MCMCEnsemble(p.log, lower.inits=c(a=0, b=0), upper.inits=c(a=1, b=1),
-#'                      max.iter=300, n.walkers=10,
-#'                      method="differential.evolution", coda=TRUE)
+#' res3 <- MCMCEnsemble(p.log, inits = unif_inits,
+#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      method = "differential.evolution", coda = TRUE)
 #'
 #' attr(res3, "ensemble.sampler")
 #'
@@ -82,16 +89,18 @@
 #' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 #' \doi{10.2140/camcos.2010.5.65}
 #'
-MCMCEnsemble <- function(f, lower.inits, upper.inits,
-                         max.iter, n.walkers = 10 * length(lower.inits),
+MCMCEnsemble <- function(f, inits, max.iter, n.walkers = 10 * ncol(inits),
                          method = c("stretch", "differential.evolution"),
                          coda = FALSE, ...) {
 
-  if (length(lower.inits) != length(upper.inits) ||
-      isTRUE(names(lower.inits) != names(upper.inits))) {
+  if (is.data.frame(inits) || inherits(inits, "tbl_df")) {
+    inits <- as.matrix(inits)
+  }
+
+  if (nrow(inits) != n.walkers) {
     stop(
-      "The length and names of 'lower.inits' and 'lower.inits' is must be
-      identical!", call. = FALSE
+      "The number of rows of `inits` must be equal to `n.walkers`",
+      call. = FALSE
     )
   }
 
@@ -100,27 +109,27 @@ MCMCEnsemble <- function(f, lower.inits, upper.inits,
   message("Using ", method, " move with ", n.walkers, " walkers.")
 
   if (method == "differential.evolution") {
-    res <- d.e.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
+    res <- d.e.mcmc(f, inits, max.iter, n.walkers, ...)
   }
   if (method == "stretch") {
-    res <- s.m.mcmc(f, lower.inits, upper.inits, max.iter, n.walkers, ...)
+    res <- s.m.mcmc(f, inits, max.iter, n.walkers, ...)
   }
 
   ## add names
-  if (is.null(names(lower.inits))) {
-    pnames <- paste0("para_", seq_along(lower.inits))
+  if (is.null(colnames(inits))) {
+    pnames <- paste0("para_", seq_len(ncol(inits)))
   } else {
-    pnames <- names(lower.inits)
+    pnames <- colnames(inits)
   }
   dimnames(res$samples) <- list(
-    paste0("walker_", 1:n.walkers),
-    paste0("generation_", 1:dim(res$samples)[2]),
+    paste0("walker_", seq_len(n.walkers)),
+    paste0("generation_", seq_len(ncol(res$samples))),
     pnames
   )
 
   dimnames(res$log.p) <- list(
-    paste0("walker_", 1:n.walkers),
-    paste0("generation_", 1:dim(res$samples)[2])
+    paste0("walker_", seq_len(n.walkers)),
+    paste0("generation_", seq_len(ncol(res$samples)))
   )
 
   ## convert to coda object

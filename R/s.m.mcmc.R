@@ -11,7 +11,7 @@
 #'
 #' @importFrom stats runif
 #'
-#' @export
+#' @noRd
 #'
 #' @references
 #' Goodman, J. and Weare, J. (2010) Ensemble samplers with affine invariance.
@@ -21,23 +21,15 @@
 #' @importFrom future.apply future_apply
 #' @importFrom progressr progressor
 #'
-s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
+s.m.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
 
-  n.dim <- length(lower.inits)
-  ## initial values
+  n.params <- ncol(inits)
 
   chain.length <- max.iter %/% n.walkers
 
   p <- progressor(chain.length)
 
-  ensemble.old <- matrix(
-    runif(n.dim*n.walkers, lower.inits, upper.inits),
-    nrow = n.walkers,
-    ncol = n.dim,
-    byrow = TRUE
-  )
-  # This allows utilisation of named vectors in f()
-  colnames(ensemble.old) <- names(lower.inits)
+  ensemble.old <- inits
 
   log.p.old <- future_apply(ensemble.old, 1, f, ..., future.seed = TRUE)
 
@@ -46,7 +38,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
   }
 
   log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
-  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.dim))
+  samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.params))
 
   log.p[, 1] <- log.p.old
   samples[, 1, ] <- ensemble.old
@@ -69,7 +61,7 @@ s.m.mcmc <- function(f, lower.inits, upper.inits, max.iter, n.walkers, ...) {
 
     log.p.new <- future_apply(ensemble.new, 1, f, ..., future.seed = TRUE)
 
-    val <- z^(n.dim - 1) * exp(log.p.new - log.p.old)
+    val <- z^(n.params - 1) * exp(log.p.new - log.p.old)
 
     # We don't want to get rid of Inf values since +Inf is a valid value to
     # accept a change. If we forbid, we are actually forbidding large log.p
