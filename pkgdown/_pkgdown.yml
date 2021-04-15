@@ -9,6 +9,11 @@ authors:
     href: https://www.normalesup.org/~hgruson/
 
 news:
+  articles:
+    - text: 'Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting'
+      href: articles/diagnostic-pkgs.html
+    - text: 'Frequently Asked Questions'
+      href: articles/faq.html
   releases:
     - text: 'Version 3.0.0'
       href: articles/blog_v3.html
