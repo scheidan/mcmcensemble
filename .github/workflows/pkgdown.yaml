@@ -36,6 +36,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("kbodwin/flair")
+          remotes::install_github("tylermorganwall/spacefillr")
           install.packages("pkgdown", type = "binary")
         shell: Rscript {0}
 
