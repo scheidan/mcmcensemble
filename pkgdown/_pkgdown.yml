@@ -8,12 +8,21 @@ authors:
   Hugo Gruson:
     href: https://www.normalesup.org/~hgruson/
 
+articles:
+- title: Vignettes
+  navbar: ~
+  contents:
+  - diagnostic-pkgs
+  - faq
+- title: Major release blog posts
+  desc: >
+    These blog posts were written and published to present the changes that
+    occurred for a major release of mcmcensemble
+  contents:
+  - starts_with("blog")
+
+
 news:
-  articles:
-    - text: 'Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting'
-      href: articles/diagnostic-pkgs.html
-    - text: 'Frequently Asked Questions'
-      href: articles/faq.html
   releases:
     - text: 'Version 3.0.0'
       href: articles/blog_v3.html
