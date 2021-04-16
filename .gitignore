@@ -40,3 +40,5 @@ vignettes/*.pdf
 
 CRAN-RELEASE
 inst/doc
+
+docs
