@@ -172,7 +172,7 @@ can be done by adding the following line to your script before running
 progressr::handlers(global = TRUE) # requires R >= 4.0
 progressr::handlers("progress")
 
-CMCEnsemble(p.log, inits = unif_inits,
+MCMCEnsemble(p.log, inits = unif_inits,
             max.iter = 5000, n.walkers = n_walkers,
             method = "differential.evolution", coda = TRUE)
 ```
