@@ -110,6 +110,10 @@ summary(res3$samples)
 plot(res3$samples)
 ```
 
+To see more plotting and MCMC diagnostic options, please refer to the relevant
+vignette:
+[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html)
+
 ## Progress bar
 
 You can choose to enable a progress bar thanks to the 

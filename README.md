@@ -76,7 +76,7 @@ str(res1)
 #>   ..- attr(*, "dimnames")=List of 3
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #>   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...
-#>   .. ..$ : chr [1:2] "para_1" "para_2"
+#>   .. ..$ : chr [1:2] "a" "b"
 #>  $ log.p  : num [1:10, 1:500] -2.8 -3.91 -2.68 -2.93 -2.25 ...
 #>   ..- attr(*, "dimnames")=List of 2
 #>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
@@ -109,15 +109,15 @@ summary(res2$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>           Mean    SD Naive SE Time-series SE
-#> para_1 -1.9746 8.892  0.12575         1.1049
-#> para_2  0.3599 3.229  0.04566         0.4147
+#>      Mean    SD Naive SE Time-series SE
+#> a -1.9746 8.892  0.12575         1.1049
+#> b  0.3599 3.229  0.04566         0.4147
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>           2.5%     25%    50%   75%  97.5%
-#> para_1 -19.563 -8.1257 -1.429 4.862 13.448
-#> para_2  -8.809 -0.7837  1.199 2.519  4.225
+#>      2.5%     25%    50%   75%  97.5%
+#> a -19.563 -8.1257 -1.429 4.862 13.448
+#> b  -8.809 -0.7837  1.199 2.519  4.225
 plot(res2$samples)
 ```
 
@@ -143,19 +143,23 @@ summary(res3$samples)
 #> 1. Empirical mean and standard deviation for each variable,
 #>    plus standard error of the mean:
 #> 
-#>           Mean    SD Naive SE Time-series SE
-#> para_1 -0.7293 9.675  0.13683         0.9148
-#> para_2  0.1894 4.103  0.05802         0.4690
+#>      Mean    SD Naive SE Time-series SE
+#> a -0.7293 9.675  0.13683         0.9148
+#> b  0.1894 4.103  0.05802         0.4690
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>          2.5%     25%     50%   75% 97.5%
-#> para_1 -23.87 -6.4298 -0.2157 6.038 16.33
-#> para_2 -13.53 -0.8687  1.6170 2.583  4.22
+#>     2.5%     25%     50%   75% 97.5%
+#> a -23.87 -6.4298 -0.2157 6.038 16.33
+#> b -13.53 -0.8687  1.6170 2.583  4.22
 plot(res3$samples)
 ```
 
 <img src="man/figures/README-example-de-1.svg" width="100%" />
+
+To see more plotting and MCMC diagnostic options, please refer to the
+relevant vignette:
+[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html)
 
 ## Progress bar
 
