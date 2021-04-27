@@ -7,5 +7,6 @@
 ^pkgdown$
 ^CRAN-RELEASE$
 ^readme.bib$
+^docs$
 
 ^LICENSE\.md$
