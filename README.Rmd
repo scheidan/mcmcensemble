@@ -43,7 +43,7 @@ install.packages("mcmcensemble")
 ```
 
 or the development version from [GitHub](https://github.com/bisaloo), via my 
-[r-universe](https://bisaloo.r-universe.dev/):
+[r-universe](https://bisaloo.r-universe.dev/ui):
 
 ```{r, eval = FALSE}
 install.packages("mcmcensemble", repos = "https://bisaloo.r-universe.dev")
