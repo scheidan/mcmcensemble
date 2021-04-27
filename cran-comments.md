@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation, R 4.0.3 on Ubuntu 20.04.1 LTS
+* local R installation, R 4.0.5 on Ubuntu 20.04.2 LTS
 * GitHub actions:
   - R oldrel on Ubuntu 20.04
   - R release on Ubuntu 20.04
