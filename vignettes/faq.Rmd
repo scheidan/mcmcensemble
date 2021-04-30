@@ -20,7 +20,7 @@ library(mcmcensemble)
 
 ## Can estimations go beyond outside the range of the `inits`?
 
-Yes, the `lower.inits` and `upper.inits` control the range of the *initial* 
+Yes, the `inits` and `inits` control the range of the *initial* 
 values, but the chain is still allowed to move freely after this initial step,
 as shown in the following example. 
 
