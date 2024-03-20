@@ -57,7 +57,7 @@ an additional attribute (accessible via `attr(res, "ensemble.sampler")`).
 ## Major changes
 
 * the ensemble sampling can now be parallelised with the future framework. Check
-the [README](https://bisaloo.github.io/mcmcensemble/) for more information
+the [README](https://hugogruson.fr/mcmcensemble/) for more information
 
 ## Other user-facing changes
 

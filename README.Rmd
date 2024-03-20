@@ -21,7 +21,7 @@ set.seed(18052020)
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version-ago/mcmcensemble)](https://CRAN.R-project.org/package=mcmcensemble)
 [![R build status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
-[![Codecov test coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Bisaloo/mcmcensemble?branch=main)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 This R package provides ensemble samplers for affine-invariant Monte Carlo
@@ -43,7 +43,7 @@ install.packages("mcmcensemble")
 ```
 
 or the development version from [GitHub](https://github.com/bisaloo), via my 
-[r-universe](https://bisaloo.r-universe.dev/ui):
+[r-universe](https://bisaloo.r-universe.dev/packages):
 
 ```{r, eval = FALSE}
 install.packages("mcmcensemble", repos = "https://bisaloo.r-universe.dev")
@@ -112,7 +112,7 @@ plot(res3$samples)
 
 To see more plotting and MCMC diagnostic options, please refer to the relevant
 vignette:
-[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html)
+[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://hugogruson.fr/mcmcensemble/articles/diagnostic-pkgs.html)
 
 ## Progress bar
 
@@ -146,7 +146,7 @@ at the start of your session.
 
 ## Similar projects
 
-The Goodman-Weare 'stretch' sampler is also available in the [tonic R package](https://github.com/svdataman/tonic).
+The Goodman-Weare 'stretch' sampler is also available in the [tonic R package](https://github.com/SimonVaughanDataAndCode/tonic).
  
 The methods used in this package also have (independent) implementations in 
 other languages:

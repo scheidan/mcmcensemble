@@ -10,17 +10,16 @@ status](https://www.r-pkg.org/badges/version-ago/mcmcensemble)](https://CRAN.R-p
 [![R build
 status](https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg)](https://github.com/Bisaloo/mcmcensemble/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg)](https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master)
+coverage](https://codecov.io/gh/Bisaloo/mcmcensemble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Bisaloo/mcmcensemble?branch=main)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 This R package provides ensemble samplers for affine-invariant Monte
 Carlo Markov Chain, which allow a faster convergence for badly scaled
 estimation problems. Two samplers are proposed: the
-‘differential.evolution’ sampler from [ter Braak and
-Vrugt](#ref-terBraak2008) ([2008](#ref-terBraak2008)) and the ‘stretch’
-sampler from [Goodman and Weare](#ref-Goodman2010)
-([2010](#ref-Goodman2010)).
+‘differential.evolution’ sampler from ter Braak and Vrugt
+([2008](#ref-terBraak2008)) and the ‘stretch’ sampler from Goodman and
+Weare ([2010](#ref-Goodman2010)).
 
 For theoretical background about Ensemble MCMC (what are the benefits
 over simple MCMC? How do they work? What are the pitfalls?), please
@@ -37,7 +36,7 @@ install.packages("mcmcensemble")
 ```
 
 or the development version from [GitHub](https://github.com/bisaloo),
-via my [r-universe](https://bisaloo.r-universe.dev/):
+via my [r-universe](https://bisaloo.r-universe.dev/packages):
 
 ``` r
 install.packages("mcmcensemble", repos = "https://bisaloo.r-universe.dev")
@@ -119,6 +118,11 @@ summary(res2$samples)
 #> a -19.563 -8.1257 -1.429 4.862 13.448
 #> b  -8.809 -0.7837  1.199 2.519  4.225
 plot(res2$samples)
+#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
+#> 'length.out'
+
+#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
+#> 'length.out'
 ```
 
 <img src="man/figures/README-example-stretch-1.svg" width="100%" />
@@ -153,13 +157,18 @@ summary(res3$samples)
 #> a -23.87 -6.4298 -0.2157 6.038 16.33
 #> b -13.53 -0.8687  1.6170 2.583  4.22
 plot(res3$samples)
+#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
+#> 'length.out'
+
+#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
+#> 'length.out'
 ```
 
 <img src="man/figures/README-example-de-1.svg" width="100%" />
 
 To see more plotting and MCMC diagnostic options, please refer to the
 relevant vignette:
-[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html)
+[`vignette("diagnostic-pkgs", package = "mcmcensemble")`](https://hugogruson.fr/mcmcensemble/articles/diagnostic-pkgs.html)
 
 ## Progress bar
 
@@ -193,20 +202,20 @@ at the start of your session.
 ## Similar projects
 
 The Goodman-Weare ‘stretch’ sampler is also available in the [tonic R
-package](https://github.com/svdataman/tonic).
+package](https://github.com/SimonVaughanDataAndCode/tonic).
 
 The methods used in this package also have (independent) implementations
 in other languages:
 
--   [emcee v3: A Python ensemble sampling toolkit for affine-invariant
-    MCMC](https://doi.org/10.21105/joss.01864)
--   [GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in
-    Matlab](https://github.com/grinsted/gwmcmc)
+- [emcee v3: A Python ensemble sampling toolkit for affine-invariant
+  MCMC](https://doi.org/10.21105/joss.01864)
+- [GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in
+  Matlab](https://github.com/grinsted/gwmcmc)
 
 ## Who is talking about this package?
 
--   [R View from October
-    2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
+- [R View from October
+  2020](https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/)
 
 ## References
 
