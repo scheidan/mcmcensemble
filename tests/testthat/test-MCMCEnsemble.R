@@ -1,6 +1,6 @@
 p.log <- function(x) {
   B <- 0.03
-  return(-x[1]^2/200 - 1/2*(x[2]+B*x[1]^2-100*B)^2)
+  return(-x[1]^2 / 200 - 1 / 2 * (x[2] + B * x[1]^2 - 100 * B)^2)
 }
 
 unif_inits <- data.frame(
@@ -9,9 +9,13 @@ unif_inits <- data.frame(
 )
 
 test_that("output sizes and names", {
-
-  res1 <- MCMCEnsemble(p.log, inits=unif_inits,
-                       max.iter=300, n.walkers=10, method="s")
+  res1 <- MCMCEnsemble(
+    p.log,
+    inits = unif_inits,
+    max.iter = 300,
+    n.walkers = 10,
+    method = "s"
+  )
 
   expect_type(res1, "list")
   expect_length(res1, 2)
@@ -24,81 +28,116 @@ test_that("output sizes and names", {
 
   # Also tests if a matrix is accepted instead of a df.
   unnamed_inits <- matrix(runif(20), ncol = 2)
-  res2 <- MCMCEnsemble(p.log, inits=unnamed_inits,
-                       max.iter=300, n.walkers=10, method="s")
+  res2 <- MCMCEnsemble(
+    p.log,
+    inits = unnamed_inits,
+    max.iter = 300,
+    n.walkers = 10,
+    method = "s"
+  )
 
   expect_identical(dimnames(res2$samples)[[3]], c("para_1", "para_2"))
-
 })
 
 test_that("coda", {
-
   skip_if_not_installed("coda")
 
-  res3 <- MCMCEnsemble(p.log, inits=unif_inits,
-                       max.iter=300, n.walkers=10, method="d", coda=TRUE)
+  res3 <- MCMCEnsemble(
+    p.log,
+    inits = unif_inits,
+    max.iter = 300,
+    n.walkers = 10,
+    method = "d",
+    coda = TRUE
+  )
 
   expect_s3_class(res3$samples, "mcmc.list")
   expect_identical(attr(res3, "ensemble.sampler"), "differential.evolution")
-
 })
 
 test_that("errors", {
   expect_error(
-    MCMCEnsemble(p.log, inits=unif_inits[5, ],
-                 max.iter=300, n.walkers=10, method="d"),
+    MCMCEnsemble(
+      p.log,
+      inits = unif_inits[5, ],
+      max.iter = 300,
+      n.walkers = 10,
+      method = "d"
+    ),
     "number of rows"
   )
 
   mockery::stub(MCMCEnsemble, "requireNamespace", FALSE)
 
   expect_error(
-    MCMCEnsemble(p.log, inits=unif_inits,
-                 max.iter=300, n.walkers=10, method="d", coda=TRUE),
+    MCMCEnsemble(
+      p.log,
+      inits = unif_inits,
+      max.iter = 300,
+      n.walkers = 10,
+      method = "d",
+      coda = TRUE
+    ),
     "coda"
   )
 
-  fw <- function (x) {
-    10*sin(0.3*x)*sin(1.3*x^2) + 0.00001*x^4 + 0.2*x+80
+  fw <- function(x) {
+    10 * sin(0.3 * x) * sin(1.3 * x^2) + 0.00001 * x^4 + 0.2 * x + 80
   }
 
   expect_error(
-    MCMCEnsemble(fw, inits=unif_inits,
-                 max.iter=300, n.walkers=10, method="s"),
+    MCMCEnsemble(
+      fw,
+      inits = unif_inits,
+      max.iter = 300,
+      n.walkers = 10,
+      method = "s"
+    ),
     "numeric of length 1"
   )
 
   expect_error(
-    MCMCEnsemble(fw, inits=unif_inits,
-                 max.iter=300, n.walkers=10, method="d"),
+    MCMCEnsemble(
+      fw,
+      inits = unif_inits,
+      max.iter = 300,
+      n.walkers = 10,
+      method = "d"
+    ),
     "numeric of length 1"
   )
 })
 
 test_that("named arguments", {
-
   set.seed(20200111)
-  res1 <- MCMCEnsemble(p.log, inits=unif_inits,
-                       max.iter=300, n.walkers=10, method="s")
+  res1 <- MCMCEnsemble(
+    p.log,
+    inits = unif_inits,
+    max.iter = 300,
+    n.walkers = 10,
+    method = "s"
+  )
 
   p.log.named <- function(x) {
     B <- 0.03
-    return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
+    return(-x["a"]^2 / 200 - 1 / 2 * (x["b"] + B * x["a"]^2 - 100 * B)^2)
   }
 
   set.seed(20200111)
-  res2 <- MCMCEnsemble(p.log.named, inits=unif_inits,
-                       max.iter=300, n.walkers=10, method="s")
+  res2 <- MCMCEnsemble(
+    p.log.named,
+    inits = unif_inits,
+    max.iter = 300,
+    n.walkers = 10,
+    method = "s"
+  )
 
   expect_identical(res1, res2)
-
 })
 
 test_that("input checking", {
-
   expect_error(
-    MCMCEnsemble(p.log, inits=unif_inits, n.walkers = 1),
+    MCMCEnsemble(p.log, inits = unif_inits, n.walkers = 1),
     "at least 2"
   )
-
 })

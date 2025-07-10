@@ -12,8 +12,8 @@ drawn from an uniform distribution whose bounds were determined by the values
 of `lower.inits` and `upper.inits`.
 
 In this new version, the user is in charge of providing a matrix (or a
-data.frame) containing all the starting values for all the parameters for all 
-the chains. If this increases somewhat the complexity of the package and the 
+data.frame) containing all the starting values for all the parameters for all
+the chains. If this increases somewhat the complexity of the package and the
 workload of the user, it has huge benefits that we will present now.
 
 ```{r}
@@ -23,10 +23,10 @@ packageVersion("mcmcensemble")
 
 ## Sample from a non-uniform distribution
 
-The main drawback from the previous behaviour is that it was not possible to 
+The main drawback from the previous behaviour is that it was not possible to
 sample the initial values from something else than a uniform distribution. You
 can now do this. If we take the 'banana' example from the `README` and want to
-start with values samples from a normal distribution centered on 0 with a 
+start with values samples from a normal distribution centered on 0 with a
 standard deviation of 2, we do:
 
 ```{r}
@@ -100,7 +100,7 @@ plot(short$samples)
 ```
 
 You may notice that this example has a very low number of iteration. We may want
-to let it run a little bit more. We can restart the chain from where it ended 
+to let it run a little bit more. We can restart the chain from where it ended
 with:
 
 ```{r}
@@ -150,12 +150,12 @@ final <- list(
 ## Migrating from mcmcensemble 2.X to mcmcensemble 3.X
 
 As mentioned in the introduction of this blog post, the prior distribution in
-previous versions of mcmcensemble was always a uniform distribution between 
+previous versions of mcmcensemble was always a uniform distribution between
 `lower.inits` and `upper.inits`. It means that your previous code snippets:
 
 ```{r v2-chunk, eval = FALSE, include = FALSE}
 MCMCEnsemble(
-  p.log, 
+  p.log,
   lower.inits = c(-5, -15), upper.inits = c(5, 15),
   max.iter = 500, n.walkers = 10,
   method = "stretch", coda = TRUE
@@ -170,7 +170,7 @@ must be updated to:
 
 ```{r v3-chunk, eval = FALSE, include = FALSE}
 MCMCEnsemble(
-  p.log, 
+  p.log,
   inits = runif(10, min = c(-5, -15), max = c(5, 15)),
   max.iter = 500, n.walkers = 10,
   method = "stretch", coda = TRUE

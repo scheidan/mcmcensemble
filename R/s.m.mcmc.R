@@ -22,7 +22,6 @@
 #' @importFrom progressr progressor
 #'
 s.m.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
-
   n.params <- ncol(inits)
 
   chain.length <- max.iter %/% n.walkers
@@ -46,7 +45,6 @@ s.m.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   p()
 
   for (l in seq_len(chain.length)[-1]) {
-
     z <- ((runif(n.walkers) + 1)^2) / 2
 
     a <- vapply(
@@ -78,5 +76,4 @@ s.m.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   }
 
   return(list(samples = samples, log.p = log.p))
-
 }

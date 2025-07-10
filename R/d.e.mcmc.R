@@ -23,7 +23,6 @@
 #' @importFrom future.apply future_apply
 #'
 d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
-
   n.params <- ncol(inits)
 
   chain.length <- max.iter %/% n.walkers
@@ -47,7 +46,6 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   p()
 
   for (l in seq_len(chain.length)[-1]) {
-
     z <- 2.38 / sqrt(2 * n.params)
     if (l %% 10 == 0) {
       z <- 1
@@ -80,9 +78,7 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
     log.p[, l] <- log.p.old
 
     p()
-
   }
 
   return(list(samples = samples, log.p = log.p))
-
 }

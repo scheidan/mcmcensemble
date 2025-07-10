@@ -90,10 +90,15 @@
 #' Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 #' \doi{10.2140/camcos.2010.5.65}
 #'
-MCMCEnsemble <- function(f, inits, max.iter, n.walkers = 10 * ncol(inits),
-                         method = c("stretch", "differential.evolution"),
-                         coda = FALSE, ...) {
-
+MCMCEnsemble <- function(
+  f,
+  inits,
+  max.iter,
+  n.walkers = 10 * ncol(inits),
+  method = c("stretch", "differential.evolution"),
+  coda = FALSE,
+  ...
+) {
   if (is.data.frame(inits) || inherits(inits, "tbl_df")) {
     inits <- as.matrix(inits)
   }
@@ -139,7 +144,6 @@ MCMCEnsemble <- function(f, inits, max.iter, n.walkers = 10 * ncol(inits),
 
   ## convert to coda object
   if (coda) {
-
     if (!requireNamespace("coda", quietly = TRUE)) {
       stop(
         "Package 'coda' needed for to create coda objects. ",
@@ -148,8 +152,9 @@ MCMCEnsemble <- function(f, inits, max.iter, n.walkers = 10 * ncol(inits),
       )
     }
 
-    ll <- lapply(seq_len(n.walkers),
-                 function(w) coda::as.mcmc(res$samples[w, , ]))
+    ll <- lapply(seq_len(n.walkers), function(w) {
+      coda::as.mcmc(res$samples[w, , ])
+    })
     res <- list(samples = coda::as.mcmc.list(ll), log.p = res$log.p)
   }
 

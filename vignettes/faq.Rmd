@@ -20,9 +20,9 @@ library(mcmcensemble)
 
 ## Can estimations go beyond outside the range of the `inits`?
 
-Yes, the `inits` and `inits` control the range of the *initial* 
+Yes, the `inits` and `inits` control the range of the *initial*
 values, but the chain is still allowed to move freely after this initial step,
-as shown in the following example. 
+as shown in the following example.
 
 Please report to the next question to learn how you can specify hard limits for
 the chains.
@@ -74,21 +74,21 @@ plot(res2$samples)
 
 ## How to restrict the possible parameter range?
 
-There is no built-in way to define hard limits for the parameter and make sure 
+There is no built-in way to define hard limits for the parameter and make sure
 they never go outside of this range.
 
-The recommended way to address this issue is to handle these cases in the 
+The recommended way to address this issue is to handle these cases in the
 function `f` you provide.
 
 For example, to keep parameters in the 0-1 range:
 
 ```{r}
 p.log.restricted <- function(x) {
-  
+
   if (any(x < 0, x > 1)) {
     return(-Inf)
   }
-  
+
   B <- 0.03 # controls 'bananacity'
   -x[1]^2 / 200 - 1 / 2 * (x[2] + B * x[1]^2 - 100 * B)^2
 }
