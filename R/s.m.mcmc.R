@@ -44,35 +44,49 @@ s.m.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
 
   p()
 
-  for (l in seq_len(chain.length)[-1]) {
-    z <- ((runif(n.walkers) + 1)^2) / 2
+  for (l in seq_len(chain.length)[-1]) {      
 
-    a <- vapply(
-      seq_len(n.walkers),
-      function(n) sample((1:n.walkers)[-n], 1),
-      integer(1)
-    )
+      ## -- random split into two subsets
+      perm <- sample.int(n.walkers)
+      subset.A <- perm[ seq_len(n.walkers / 2)]
+      subset.B <- perm[-seq_len(n.walkers / 2)]
 
-    par.active <- ensemble.old[a, ]
+      ## loop over the two halfs:
+      for (pass in 1:2) {
 
-    ensemble.new <- par.active + z * (ensemble.old - par.active)
+          active.idx  <-  if (pass == 1) subset.1 else subset.2
+          inactive.idx <- if (pass == 1) subset.2 else subset.1
 
-    log.p.new <- future_apply(ensemble.new, 1, f, ..., future.seed = TRUE)
+          ## for each active particle choose a partner from the inactive subset
+          partner.idx <- sample(inactive.idx, length(active.idx), replace = TRUE)
 
-    val <- z^(n.params - 1) * exp(log.p.new - log.p.old)
+          partner <- ensemble.old[partner.idx, , drop = FALSE]
+          active  <- ensemble.old[active.idx, , drop = FALSE]
 
-    # We don't want to get rid of Inf values since +Inf is a valid value to
-    # accept a change. If we forbid, we are actually forbidding large log.p
-    # changes.
-    acc <- !is.na(val) & val > runif(n.walkers)
+          ##  proposal  x' = y + z·(x − y)
+          z <- ((runif(length(active.idx)) + 1)^2) / 2
+          prop <- partner + z * (active - partner)
 
-    ensemble.old[acc, ] <- ensemble.new[acc, ]
-    log.p.old[acc] <- log.p.new[acc]
+          ## acceptance probability
+          log.p.new <- future_apply(prop, 1, f, ..., future.seed = TRUE)
 
-    samples[, l, ] <- ensemble.old
-    log.p[, l] <- log.p.old
+          ## We don't want to get rid of Inf values since +Inf is a valid value to
+          ## accept a change. If we forbid, we are actually forbidding large log.p
+          ## changes.
+          q <- z^(n.params - 1) * exp(log.p.new - log.p.old[active.idx])
+          accept  <- !is.na(q) & q > runif(length(q))
 
-    p()
+          ## -- apply accepted moves
+          if (any(accept)) {
+              idx.acc                 <- active.idx[accept]
+              ensemble.old[idx.acc, ] <- prop[accept, ]
+              log.p.old[idx.acc]      <- log.p.new[accept]
+          }
+      }
+
+      samples[, l, ] <- ensemble.old
+      log.p[,  l]  <- log.p.old
+      p()
   }
 
   return(list(samples = samples, log.p = log.p))
