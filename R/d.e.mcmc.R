@@ -46,38 +46,56 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   p()
 
   for (l in seq_len(chain.length)[-1]) {
-    z <- 2.38 / sqrt(2 * n.params)
-    if (l %% 10 == 0) {
-      z <- 1
-    }
 
-    s <- vapply(
-      seq_len(n.walkers),
-      function(n) sample((1:n.walkers)[-n], 2, replace = FALSE),
-      integer(2)
-    )
+      z <- 2.38 / sqrt(2 * n.params)
+      if (l %% 10 == 0) z <- 1
 
-    par.active.1 <- ensemble.old[s[1, ], ]
-    par.active.2 <- ensemble.old[s[2, ], ]
+      ## -- random permutation and 50 / 50 split
+      perm      <- sample.int(n.walkers)
+      subset.1  <- perm[seq_len(n.walkers / 2)]
+      subset.2  <- perm[-seq_len(n.walkers / 2)]
 
-    ensemble.new <- ensemble.old + z * (par.active.1 - par.active.2)
+      ## -- loop over the two halfs:
+      for (pass in 1:2) {
 
-    log.p.new <- future_apply(ensemble.new, 1, f, ..., future.seed = TRUE)
+          active.idx   <- if (pass == 1) subset.1 else subset.2
+          inactive.idx <- if (pass == 1) subset.2 else subset.1
 
-    val <- exp(log.p.new - log.p.old)
+          ## choose two distinct partners for every active walker
+          partners <- vapply(
+              seq_along(active.idx),
+              function(i) sample(inactive.idx, 2, replace = FALSE),
+              integer(2)
+          )
 
-    # We don't want to get rid of Inf values since +Inf is a valid value to
-    # accept a change. If we forbid, we are actually forbidding large log.p
-    # changes.
-    acc <- !is.na(val) & val > runif(n.walkers)
+          partner.1 <- ensemble.old[partners[1, ], , drop = FALSE]
+          partner.2 <- ensemble.old[partners[2, ], , drop = FALSE]
+          active <-    ensemble.old[active.idx, , drop = FALSE]
 
-    ensemble.old[acc, ] <- ensemble.new[acc, ]
-    log.p.old[acc] <- log.p.new[acc]
+          ## proposal  x' = x + z · (y₁ − y₂)
+          prop <- active +  z * (partner.1 - partner.2)
 
-    samples[, l, ] <- ensemble.old
-    log.p[, l] <- log.p.old
+          ## acceptance probability
+          log.p.new <- future_apply(prop, 1, f, ..., future.seed = TRUE)
 
-    p()
+          ## We don't want to get rid of Inf values since +Inf is a valid value to
+          ## accept a change. If we forbid, we are actually forbidding large log.p
+          ## changes.
+          q <- exp(log.p.new - log.p.old[active.idx])
+          accept <- !is.na(q) & q > runif(length(q))
+
+          ## -- apply accepted moves
+          if (any(accept)) {
+              idx.acc                 <- active.idx[accept]
+              ensemble.old[idx.acc, ] <- prop[accept, ]
+              log.p.old[idx.acc]      <- log.p.new[accept]
+          }
+      }
+
+      ## -- record state and advance progress bar
+      samples[, l, ] <- ensemble.old
+      log.p[,  l]    <- log.p.old
+      p()
   }
 
   return(list(samples = samples, log.p = log.p))
