@@ -29,19 +29,19 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
 
   p <- progressor(chain.length)
 
-  ensemble.old <- inits
+  ensemble <- inits
 
-  log.p.old <- future_apply(ensemble.old, 1, f, ..., future.seed = TRUE)
+  log.p <- future_apply(ensemble, 1, f, ..., future.seed = TRUE)
 
-  if (!is.vector(log.p.old, mode = "numeric")) {
-    stop("Function 'f' should return a numeric of length 1", call. = FALSE)
+  if (!is.vector(log.p, mode = "numeric")) {
+      stop("Function 'f' should return a numeric of length 1", call. = FALSE)
   }
 
-  log.p <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
+  log.ps <- matrix(NA_real_, nrow = n.walkers, ncol = chain.length)
   samples <- array(NA_real_, dim = c(n.walkers, chain.length, n.params))
 
-  log.p[, 1] <- log.p.old
-  samples[, 1, ] <- ensemble.old
+  log.ps[, 1] <- log.p
+  samples[, 1, ] <- ensemble
 
   p()
 
@@ -50,12 +50,12 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
       z <- 2.38 / sqrt(2 * n.params)
       if (l %% 10 == 0) z <- 1
 
-      ## -- random permutation and 50 / 50 split
+      ## random split into two subsets
       perm      <- sample.int(n.walkers)
       subset.1  <- perm[seq_len(n.walkers / 2)]
       subset.2  <- perm[-seq_len(n.walkers / 2)]
 
-      ## -- loop over the two halfs:
+      ## loop over the two halfs:
       for (pass in 1:2) {
 
           active.idx   <- if (pass == 1) subset.1 else subset.2
@@ -68,35 +68,35 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
               integer(2)
           )
 
-          partner.1 <- ensemble.old[partners[1, ], , drop = FALSE]
-          partner.2 <- ensemble.old[partners[2, ], , drop = FALSE]
-          active <-    ensemble.old[active.idx, , drop = FALSE]
+          partner.1 <- ensemble[partners[1, ], , drop = FALSE]
+          partner.2 <- ensemble[partners[2, ], , drop = FALSE]
+          active <-    ensemble[active.idx, , drop = FALSE]
 
           ## proposal  x' = x + z · (y₁ − y₂)
           prop <- active +  z * (partner.1 - partner.2)
 
           ## acceptance probability
-          log.p.new <- future_apply(prop, 1, f, ..., future.seed = TRUE)
+          log.p.prop <- future_apply(prop, 1, f, ..., future.seed = TRUE)
 
           ## We don't want to get rid of Inf values since +Inf is a valid value to
           ## accept a change. If we forbid, we are actually forbidding large log.p
           ## changes.
-          q <- exp(log.p.new - log.p.old[active.idx])
+          q <- exp(log.p.prop - log.p[active.idx])
           accept <- !is.na(q) & q > runif(length(q))
 
-          ## -- apply accepted moves
+          ## apply accepted moves
           if (any(accept)) {
-              idx.acc                 <- active.idx[accept]
-              ensemble.old[idx.acc, ] <- prop[accept, ]
-              log.p.old[idx.acc]      <- log.p.new[accept]
+              idx.acc             <- active.idx[accept]
+              ensemble[idx.acc, ] <- prop[accept, ]
+              log.p[idx.acc]      <- log.p.prop[accept]
           }
       }
 
       ## -- record state and advance progress bar
-      samples[, l, ] <- ensemble.old
-      log.p[,  l]    <- log.p.old
+      samples[, l, ] <- ensemble
+      log.ps[,  l]   <- log.p
       p()
   }
 
-  return(list(samples = samples, log.p = log.p))
+  return(list(samples = samples, log.p = log.ps))
 }
