@@ -135,8 +135,8 @@ test_that("named arguments", {
   expect_identical(res1, res2)
 })
 
-for (d in 1:2) {
-  test_that("minimal number of walkers: stretch", {
+test_that("minimal number of walkers: stretch", {
+  for (d in 1:2) {
     expect_error(
       MCMCEnsemble(
         p.log,
@@ -147,11 +147,11 @@ for (d in 1:2) {
       "min(3, d+1)",
       fixed = TRUE
     )
-  })
-}
+  }
+})
 
-for (d in 1:3) {
-  test_that("minimal number of walkers: differential evolution", {
+test_that("minimal number of walkers: differential evolution", {
+  for (d in 1:3) {
     expect_error(
       MCMCEnsemble(
         p.log,
@@ -162,5 +162,5 @@ for (d in 1:3) {
       "min(4, d+2)",
       fixed = TRUE
     )
-  })
-}
+  }
+})
