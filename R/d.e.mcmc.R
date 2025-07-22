@@ -85,11 +85,9 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
       accept <- !is.na(q) & q > runif(length(q))
 
       ## apply accepted moves
-      if (any(accept)) {
-        idx.acc <- active.idx[accept]
-        ensemble[idx.acc, ] <- prop[accept, ]
-        log.p[idx.acc] <- log.p.prop[accept]
-      }
+      idx.acc <- active.idx[accept]
+      ensemble[idx.acc, ] <- prop[accept, ]
+      log.p[idx.acc] <- log.p.prop[accept]
     }
 
     ## -- record state and advance progress bar
