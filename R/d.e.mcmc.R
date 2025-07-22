@@ -46,9 +46,9 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   p()
 
   for (l in seq_len(chain.length)[-1]) {
-    z <- 2.38 / sqrt(2 * n.params)
+    gamma0 <- 2.38 / sqrt(2 * n.params) # See Nelson et al. (2013), eq(10), https://doi.org/10.1088/0067-0049/210/1/11/.
     if (l %% 10 == 0) {
-      z <- 1
+      gamma0 <- 1
     }
 
     ## random split into two subsets
@@ -73,6 +73,9 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
       active <- ensemble[active.idx, , drop = FALSE]
 
       ## proposal  x' = x + z · (y₁ − y₂)
+      ## See Nelson et al. (2013), eq(10), https://doi.org/10.1088/0067-0049/210/1/11/.
+      ## Values are based on the defaults of Emcee.
+      z <- gamma0 * (1 + 1e-5 * rnorm(length(active.idx)))
       prop <- active + z * (partner.1 - partner.2)
 
       ## acceptance probability
