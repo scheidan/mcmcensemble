@@ -135,9 +135,26 @@ test_that("named arguments", {
   expect_identical(res1, res2)
 })
 
-test_that("input checking", {
-  expect_error(
-    MCMCEnsemble(p.log, inits = unif_inits, n.walkers = 1),
-    "at least 2"
-  )
-})
+for(d in 1:2){
+    test_that("minimal number of walkers: stretch", {
+        expect_error(
+            MCMCEnsemble(p.log,
+                         inits = unif_inits,
+                         n.walkers = d,
+                         method = "stretch"),
+            "min\\(\\s*3\\s*,\\s*d\\+1\\s*\\)" # matches: "min(3, d+1)"
+        )
+    })
+}
+
+for(d in 1:3){
+    test_that("minimal number of walkers: differential evolution", {
+        expect_error(
+            MCMCEnsemble(p.log,
+                         inits = unif_inits,
+                         n.walkers = d,
+                         method = "diff"),
+            "min\\(\\s*4\\s*,\\s*d\\+2\\s*\\)" # matches: "min(3, d+2)"
+        )
+    })
+}

@@ -98,13 +98,20 @@ MCMCEnsemble <- function(
   method = c("stretch", "differential.evolution"),
   coda = FALSE,
   ...
-) {
+  ) {
+
+  method <- match.arg(method)
+    
   if (is.data.frame(inits) || inherits(inits, "tbl_df")) {
     inits <- as.matrix(inits)
   }
 
-  if (n.walkers < 2) {
-    stop("The number of walkers must be at least 2", call. = FALSE)
+  dims <- ncol(inits)
+  if (method == "stretch" & n.walkers < min(3, dims+1)) {
+      stop("The number of walkers must be at least `min(3, d+1)` where `d` is the number of parameters.", call. = FALSE)
+  }
+  if (method == "differential.evolution" & min(4, n.walkers < dims+2)) {
+      stop("The number of walkers must be at least `min(4, d+2)` where `d` is the number of parameters.", call. = FALSE)
   }
 
   if (nrow(inits) != n.walkers) {
@@ -115,7 +122,6 @@ MCMCEnsemble <- function(
   }
 
   ## run mcmc
-  method <- match.arg(method)
   message("Using ", method, " move with ", n.walkers, " walkers.")
 
   if (method == "differential.evolution") {
