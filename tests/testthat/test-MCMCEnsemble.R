@@ -153,7 +153,12 @@ for (d in 1:2) {
 for (d in 1:3) {
   test_that("minimal number of walkers: differential evolution", {
     expect_error(
-      MCMCEnsemble(p.log, inits = unif_inits, n.walkers = d, method = "diff"),
+      MCMCEnsemble(
+        p.log,
+        inits = unif_inits,
+        n.walkers = d,
+        method = "differential.evolution"
+      ),
       "min(4, d+2)",
       fixed = TRUE
     )
