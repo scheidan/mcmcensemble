@@ -5,7 +5,7 @@ skip_if_not_installed("mvtnorm")
 target <- runif(2, min = -50, max = 50)
 
 p.log <- function(x) {
-    mvtnorm::dmvnorm(x, target, sigma = diag(2), log = TRUE)
+  mvtnorm::dmvnorm(x, target, sigma = diag(2), log = TRUE)
 }
 
 unif_inits <- data.frame(
