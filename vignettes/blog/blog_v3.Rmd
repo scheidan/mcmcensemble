@@ -153,7 +153,7 @@ As mentioned in the introduction of this blog post, the prior distribution in
 previous versions of mcmcensemble was always a uniform distribution between
 `lower.inits` and `upper.inits`. It means that your previous code snippets:
 
-```{r v2-chunk, eval = FALSE, include = FALSE}
+```{r v2-chunk, eval = FALSE}
 MCMCEnsemble(
   p.log,
   lower.inits = c(-5, -15), upper.inits = c(5, 15),
@@ -162,21 +162,13 @@ MCMCEnsemble(
 )
 ```
 
-```{r, echo = FALSE}
-flair::flair_lines(flair::decorate_chunk("v2-chunk", eval = FALSE), 3)
-```
-
 must be updated to:
 
-```{r v3-chunk, eval = FALSE, include = FALSE}
+```{r v3-chunk, eval = FALSE}
 MCMCEnsemble(
   p.log,
   inits = runif(10, min = c(-5, -15), max = c(5, 15)),
   max.iter = 500, n.walkers = 10,
   method = "stretch", coda = TRUE
 )
-```
-
-```{r, echo = FALSE}
-flair::flair_lines(flair::decorate_chunk("v3-chunk", eval = FALSE), 3)
 ```
